@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { invalidate } from "@/lib/memo";
 import { and, eq, ne } from "drizzle-orm";
 import { db, posts } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
@@ -37,6 +38,7 @@ export async function savePost(_: PostFormState, fd: FormData): Promise<PostForm
   let postId = id;
   if (id) await db.update(posts).set(data).where(eq(posts.id, id));
   else postId = (await db.insert(posts).values(data))[0].insertId;
+  invalidate("catalog:");
   revalidatePath("/blog", "layout");
   redirect(`/admin/posts/${postId}?saved=1`);
 }
@@ -45,6 +47,7 @@ export async function deletePost(fd: FormData) {
   await requireAdmin();
   const id = Number(fd.get("id"));
   if (id) await db.delete(posts).where(eq(posts.id, id));
+  invalidate("catalog:");
   revalidatePath("/blog", "layout");
   redirect("/admin/posts");
 }

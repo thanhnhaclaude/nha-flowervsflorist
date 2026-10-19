@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito_Sans, Playfair_Display } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
-const nunito = Nunito_Sans({ subsets: ["latin"], variable: "--font-nunito", display: "swap" });
+// One web font (headings). Body text uses the native system UI font: zero download, fastest layout.
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], style: ["normal", "italic"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-US" className={`${playfair.variable} ${nunito.variable}`}>
+    <html lang="en-US" className={playfair.variable}>
       <body>{children}</body>
     </html>
   );

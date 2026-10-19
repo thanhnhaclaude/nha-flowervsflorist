@@ -27,18 +27,18 @@ export function pageMeta(opts: { title: string; description: string; path: strin
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "Florist",
+    // An online store (no walk-in shop at the office address), owned by M&R Marketing Group.
+    "@type": "OnlineStore",
     "@id": `${site.url}/#business`,
     name: site.name,
     legalName: site.company.legalName,
     url: site.url,
-    logo: `${site.url}/icon.svg`,
+    logo: `${site.url}/apple-icon`,
     image: `${site.url}/images/hero/vibrant-bouquet.webp`,
     description: site.description,
     telephone: site.phone,
     email: site.email,
-    priceRange: "$$",
-    foundingDate: site.company.formed,
+    parentOrganization: { "@type": "Organization", name: site.parent.name, legalName: site.company.legalName, url: site.parent.url, sameAs: site.parent.sameAs },
     address: {
       "@type": "PostalAddress",
       streetAddress: site.company.street,
@@ -48,11 +48,18 @@ export function organizationJsonLd() {
       addressCountry: "US",
     },
     areaServed: { "@type": "Country", name: "United States" },
-    openingHoursSpecification: [
-      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "19:00" },
-      { "@type": "OpeningHoursSpecification", dayOfWeek: "Sunday", opens: "10:00", closes: "16:00" },
-    ],
+    hasMerchantReturnPolicy: returnPolicyJsonLd(),
     contactPoint: { "@type": "ContactPoint", telephone: site.phone, email: site.email, contactType: "customer service", areaServed: "US", availableLanguage: "English" },
+  };
+}
+
+/** Fresh flowers are perishable and aren't sent back; problems are fixed by replacement or refund (see /refund-policy). */
+export function returnPolicyJsonLd() {
+  return {
+    "@type": "MerchantReturnPolicy",
+    applicableCountry: "US",
+    returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    merchantReturnLink: `${site.url}/refund-policy`,
   };
 }
 

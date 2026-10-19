@@ -18,7 +18,7 @@ export function Logo({ light = false }: { light?: boolean }) {
       <LogoMark className="h-8 w-8 shrink-0 sm:h-9 sm:w-9" />
       <span className="leading-none">
         <span className={`block font-display text-[1.15rem] font-bold tracking-tight sm:text-[1.35rem] ${light ? "text-white" : "text-plum-700"}`}>
-          Flower<span className="text-rose-600 italic">Vs</span>Florist
+          Flower<span className={`italic ${light ? "text-gold" : "text-rose-600"}`}>Vs</span>Florist
         </span>
         <span className={`mt-1 hidden text-[0.625rem] font-extrabold uppercase tracking-[0.22em] sm:block ${light ? "text-plum-100" : "text-muted"}`}>
           Same-day flower delivery

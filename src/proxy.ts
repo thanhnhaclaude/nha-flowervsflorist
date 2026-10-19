@@ -3,6 +3,16 @@ import { NextResponse, type NextRequest } from "next/server";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // SEO: one canonical host — www.flowervsflorist.com -> flowervsflorist.com (301)
+  const host = request.headers.get("host") ?? "";
+  if (host.startsWith("www.")) {
+    const url = request.nextUrl.clone();
+    url.host = host.slice(4);
+    url.port = "";
+    url.protocol = "https:";
+    return NextResponse.redirect(url, 301);
+  }
+
   // SEO: uppercase URLs are duplicates of the lowercase page -> 301 (skip files with an extension).
   if (/[A-Z]/.test(pathname) && !/\.[a-z0-9]+$/i.test(pathname) && !pathname.startsWith("/order/")) {
     const url = request.nextUrl.clone();

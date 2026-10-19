@@ -45,7 +45,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             </div>
           </div>
           <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-lift md:block">
-            <Image src={img(c.image)} alt={c.h1} fill priority sizes="40vw" className="object-cover" />
+            <Image src={img(c.image)} alt={c.h1} fill fetchPriority="high" loading="eager" sizes="40vw" className="object-cover" />
           </div>
         </div>
       </section>

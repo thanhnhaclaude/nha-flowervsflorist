@@ -2,23 +2,24 @@ import "server-only";
 import { cache } from "react";
 import { and, asc, avg, count, desc, eq, inArray, lte } from "drizzle-orm";
 import { db, posts, products, reviews, type Post, type Product } from "./db";
+import { memo } from "./memo";
 
 export type ProductWithRating = Product & { rating: number | null; reviewCount: number };
 
 /** Approved-review averages for all products, keyed by product id. */
 const ratingMap = cache(async () => {
-  const rows = await db
+  const rows = await memo("catalog:ratings", () => db
     .select({ productId: reviews.productId, avg: avg(reviews.rating), n: count() })
     .from(reviews)
     .where(eq(reviews.approved, true))
-    .groupBy(reviews.productId);
+    .groupBy(reviews.productId));
   return new Map(rows.map((r) => [r.productId, { rating: r.avg ? Number(r.avg) : null, reviewCount: r.n }]));
 });
 
 /** All active products (the catalog is small, so filtering happens in memory). */
 export const getProducts = cache(async (): Promise<ProductWithRating[]> => {
   const [rows, ratings] = await Promise.all([
-    db.select().from(products).where(eq(products.active, true)).orderBy(asc(products.sortOrder), asc(products.id)),
+    memo("catalog:products", () => db.select().from(products).where(eq(products.active, true)).orderBy(asc(products.sortOrder), asc(products.id))),
     ratingMap(),
   ]);
   return rows.map((p) => ({ ...p, ...(ratings.get(p.id) ?? { rating: null, reviewCount: 0 }) }));
@@ -89,7 +90,7 @@ export const getProductReviews = (productId: number) =>
 
 export const getPosts = cache(
   async (): Promise<Post[]> =>
-    db.select().from(posts).where(and(eq(posts.status, "published"), lte(posts.publishedAt, new Date()))).orderBy(desc(posts.publishedAt)),
+    memo("catalog:posts", () => db.select().from(posts).where(and(eq(posts.status, "published"), lte(posts.publishedAt, new Date()))).orderBy(desc(posts.publishedAt))),
 );
 
 export const getPost = cache(async (slug: string) => (await getPosts()).find((p) => p.slug === slug) ?? null);

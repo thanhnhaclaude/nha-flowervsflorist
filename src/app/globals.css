@@ -17,14 +17,14 @@
   --color-rose-50: #fff1f3;
   --color-rose-100: #ffe4e8;
   --color-rose-500: #f43f5e;
-  --color-rose-600: #e11d48;
-  --color-rose-700: #be123c;
+  --color-rose-600: #d0103d;
+  --color-rose-700: #b00d34;
 
   --color-blush: #fff5f8;
   --color-petal: #fde8f0;
   --color-gold: #f5a524;
   --color-gold-soft: #fff4dc;
-  --color-leaf: #15803d;
+  --color-leaf: #13703a;
   --color-leaf-soft: #e8f6ec;
 
   --color-ink: #2a1520;
@@ -33,7 +33,7 @@
   --color-card: #ffffff;
   --color-danger: #c81e1e;
 
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
 
   --radius-card: 1.25rem;
@@ -76,7 +76,6 @@
     letter-spacing: -0.01em;
     text-wrap: balance;
   }
-  p { text-wrap: pretty; }
   a, button, [role="button"], summary, label[for], select { cursor: pointer; }
   :focus-visible {
     outline: 3px solid var(--color-rose-500);
@@ -113,7 +112,7 @@
   }
   .btn:active { transform: scale(0.98); }
   .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-  .btn-primary { background: var(--color-rose-600); color: #fff; box-shadow: 0 8px 20px -10px rgb(225 29 72 / 0.7); }
+  .btn-primary { background: var(--color-rose-600); color: #fff; box-shadow: 0 8px 20px -10px rgb(208 16 61 / 0.6); }
   .btn-primary:hover { background: var(--color-rose-700); }
   .btn-plum { background: var(--color-plum-600); color: #fff; }
   .btn-plum:hover { background: var(--color-plum-700); }

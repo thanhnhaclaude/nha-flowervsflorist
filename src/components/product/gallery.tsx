@@ -25,7 +25,7 @@ export function Gallery({ images, name }: { images: string[]; name: string }) {
         </div>
       )}
       <div className="relative aspect-[4/5] flex-1 overflow-hidden rounded-[1.5rem] bg-petal">
-        <Image key={images[active]} src={img(images[active])} alt={name} fill priority sizes="(min-width: 1024px) 45vw, 100vw" className="animate-fade-up object-cover [animation-duration:0.35s]" />
+        <Image key={images[active]} src={img(images[active])} alt={name} fill fetchPriority="high" loading="eager" sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
       </div>
     </div>
   );

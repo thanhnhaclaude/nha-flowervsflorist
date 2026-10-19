@@ -61,7 +61,7 @@ Operated by ${site.company.displayName} · ${addressLine}
 }
 
 const button = (href: string, label: string) =>
-  `<p style="margin:24px 0"><a href="${href}" style="background:#e11d48;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:bold">${label}</a></p>`;
+  `<p style="margin:24px 0"><a href="${href}" style="background:#d0103d;color:#fff;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:bold">${label}</a></p>`;
 
 export const orderLink = (o: Pick<Order, "code" | "accessToken">) => `${site.url}/order/${o.code}?t=${o.accessToken}`;
 
@@ -158,7 +158,7 @@ export async function sendWelcomeEmail(email: string) {
     layout(
       "Welcome to the bloom club!",
       `<p style="line-height:1.6">Thanks for subscribing. Enjoy <b>10% off</b> your first order with code:</p>
-<p style="font-size:26px;font-weight:bold;letter-spacing:3px;color:#e11d48;margin:8px 0 0">WELCOME10</p>
+<p style="font-size:26px;font-weight:bold;letter-spacing:3px;color:#d0103d;margin:8px 0 0">WELCOME10</p>
 ${button(`${site.url}/best-sellers`, "Shop best sellers")}
 <p style="font-size:12px;color:#6b5560">You can unsubscribe anytime by replying "unsubscribe".</p>`,
     ),

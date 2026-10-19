@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { invalidate } from "@/lib/memo";
 import { and, eq, ne } from "drizzle-orm";
 import { db, products } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
@@ -62,6 +63,7 @@ export async function saveProduct(_: ProductFormState, fd: FormData): Promise<Pr
   let productId = id;
   if (id) await db.update(products).set(data).where(eq(products.id, id));
   else productId = (await db.insert(products).values(data))[0].insertId;
+  invalidate("catalog:");
   revalidatePath("/", "layout");
   redirect(`/admin/products/${productId}?saved=1`);
 }
@@ -71,6 +73,7 @@ export async function deleteProduct(fd: FormData) {
   const id = Number(fd.get("id"));
   // Soft delete keeps past orders and links intact.
   if (id) await db.update(products).set({ active: false }).where(eq(products.id, id));
+  invalidate("catalog:");
   revalidatePath("/", "layout");
   redirect("/admin/products");
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { invalidate } from "@/lib/memo";
 import { desc, eq } from "drizzle-orm";
 import { db, products, reviews } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
@@ -17,6 +18,7 @@ async function moderate(fd: FormData) {
   if (op === "approve") await db.update(reviews).set({ approved: true }).where(eq(reviews.id, id));
   if (op === "hide") await db.update(reviews).set({ approved: false }).where(eq(reviews.id, id));
   if (op === "delete") await db.delete(reviews).where(eq(reviews.id, id));
+  invalidate("catalog:");
   revalidatePath("/", "layout");
   redirect("/admin/reviews");
 }

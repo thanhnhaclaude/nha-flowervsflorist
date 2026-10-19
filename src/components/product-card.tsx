@@ -1,12 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Star, Truck } from "lucide-react";
-import { useCart } from "./cart/cart-context";
-import { useWishlist } from "./wishlist-context";
+import { Star, Truck } from "lucide-react";
+import { QuickAdd, WishlistButton } from "./product-card-actions";
 import { img, usd } from "@/lib/format";
-
 import type { CardProduct } from "@/lib/cards";
 
 export type { CardProduct };
@@ -21,12 +17,10 @@ export function Stars({ rating, className = "h-4 w-4" }: { rating: number; class
   );
 }
 
-export function ProductCard({ product, priority = false }: { product: CardProduct; priority?: boolean }) {
-  const { add } = useCart();
-  const wishlist = useWishlist();
-  const saved = wishlist.has(product.id);
-  const [first, second] = product.images;
+const SIZES = "(min-width: 1280px) 300px, (min-width: 768px) 30vw, 50vw";
 
+export function ProductCard({ product, priority = false }: { product: CardProduct; priority?: boolean }) {
+  const [first, second] = product.images;
   return (
     <article className="group relative flex flex-col">
       <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] bg-petal">
@@ -35,13 +29,12 @@ export function ProductCard({ product, priority = false }: { product: CardProduc
             src={img(first)}
             alt={product.name}
             fill
-            priority={priority}
-            sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 50vw"
+            loading={priority ? "eager" : undefined}
+            fetchPriority={priority ? "high" : undefined}
+            sizes={SIZES}
             className={`object-cover transition-[transform,opacity] duration-500 group-hover:scale-[1.04] ${second ? "group-hover:opacity-0" : ""}`}
           />
-          {second && (
-            <Image src={img(second)} alt="" fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 30vw, 50vw" className="object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          )}
+          {second && <Image src={img(second)} alt="" fill sizes={SIZES} className="object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100" />}
         </Link>
         <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
           {product.badge && <span className="rounded-full bg-rose-600 px-2.5 py-1 text-[0.6875rem] font-extrabold uppercase tracking-wide text-white">{product.badge}</span>}
@@ -51,24 +44,8 @@ export function ProductCard({ product, priority = false }: { product: CardProduc
             </span>
           )}
         </div>
-        <button
-          type="button"
-          onClick={() => wishlist.toggle(product.id)}
-          aria-pressed={saved}
-          aria-label={saved ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
-          className="absolute right-3 top-3 grid h-11 w-11 place-items-center rounded-full bg-white/95 text-plum-600 shadow-sm transition-transform hover:scale-110"
-        >
-          <Heart className="h-5 w-5" fill={saved ? "currentColor" : "none"} />
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            add({ productId: product.id, slug: product.slug, name: product.name, image: first, price: product.price, hasSizes: product.hasSizes, sameDay: product.sameDay, size: "standard", addOns: [] })
-          }
-          className="absolute inset-x-3 bottom-3 hidden translate-y-2 rounded-full bg-plum-600 py-3 text-sm font-extrabold text-white opacity-0 transition-all duration-300 hover:bg-plum-700 focus-visible:translate-y-0 focus-visible:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 md:block"
-        >
-          Quick Add — {usd(product.price)}
-        </button>
+        <WishlistButton id={product.id} name={product.name} />
+        <QuickAdd product={product} />
       </div>
       <div className="mt-3 flex flex-1 flex-col px-0.5">
         <h3 className="font-sans text-[0.98rem] font-bold leading-snug text-ink">
@@ -103,4 +80,3 @@ export function ProductGrid({ products, priorityCount = 0 }: { products: CardPro
     </div>
   );
 }
-

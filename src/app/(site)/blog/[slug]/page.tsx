@@ -40,7 +40,7 @@ export default async function PostPage({ params }: Props) {
       {post.cover && (
         <div className="container-x max-w-5xl">
           <div className="relative aspect-[7/4] overflow-hidden rounded-[1.75rem]">
-            <Image src={img(post.cover)} alt={post.title} fill priority sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
+            <Image src={img(post.cover)} alt={post.title} fill fetchPriority="high" loading="eager" sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
           </div>
         </div>
       )}

@@ -74,7 +74,7 @@ Trong phần **Environment variables**, thêm **từng dòng** trong `deploy/hos
 ## Bước 8: Google & Bing
 
 1. Thêm `flowervsflorist.com` vào **Google Search Console** và **Bing Webmaster Tools**, gửi sitemap `https://flowervsflorist.com/sitemap.xml`.
-2. Tạo **Google Business Profile** cho M&R Marketing Group (dạng service-area business, địa chỉ Macon, GA).
+2. **Google Business Profile:** chỉ tạo khi shop có nơi nhận/giao hoa thật tại Macon. Địa chỉ 331 3rd Street là văn phòng agency M&R, không phải tiệm hoa, nên không đăng ký làm "Florist" tại địa chỉ đó (Google có thể khóa hồ sơ).
 3. Thay ảnh Unsplash bằng ảnh thật của shop trong **Admin → Products → Upload images**.
 
 ---

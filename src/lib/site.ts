@@ -25,10 +25,23 @@ export const site = {
     postalCode: "31201",
     country: "US",
   },
+  /** The shop's own social profiles. Leave empty until they exist — empty links are hidden. */
   social: {
-    facebook: "https://www.facebook.com/",
-    instagram: "https://www.instagram.com/",
-    pinterest: "https://www.pinterest.com/",
+    facebook: "",
+    instagram: "",
+    pinterest: "",
+  },
+  /** Parent company (owner/operator of this store). */
+  parent: {
+    name: "M&R Marketing Group, LLC",
+    url: "https://www.mandr-group.com/",
+    description: "a full-service marketing agency in Macon, Georgia",
+    sameAs: [
+      "https://www.facebook.com/MandRGroup",
+      "https://www.instagram.com/mandrmarketing",
+      "https://www.linkedin.com/company/m&r-marketing-group",
+      "https://x.com/mandrmarketing",
+    ],
   },
 } as const;
 

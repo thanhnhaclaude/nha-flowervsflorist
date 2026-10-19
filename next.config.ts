@@ -11,9 +11,11 @@ const nextConfig: NextConfig = {
   // Always put title/description/canonical in <head> (no streamed metadata) so every crawler reads it.
   htmlLimitedBots: /.*/,
   poweredByHeader: false,
+  // Tailwind CSS is small: inline it to remove the render-blocking stylesheet request (better FCP/LCP).
+  experimental: { inlineCss: true },
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [70, 80],
+    qualities: [60, 70, 80],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async headers() {

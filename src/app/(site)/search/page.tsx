@@ -40,6 +40,7 @@ export default async function SearchPage({ searchParams }: Props) {
             ))}
           </div>
         )}
+        <h2 className="sr-only">Matching products</h2>
         {results.length > 0 ? (
           <ProductGrid products={results.map(toCard)} />
         ) : (

@@ -23,7 +23,7 @@ export default async function BlogPage() {
         {lead && (
           <Link href={`/blog/${lead.slug}`} className="group card mb-10 grid overflow-hidden md:grid-cols-2">
             <span className="relative block aspect-[7/4] md:aspect-auto md:min-h-[360px]">
-              {lead.cover && <Image src={img(lead.cover)} alt="" fill priority sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />}
+              {lead.cover && <Image src={img(lead.cover)} alt="" fill fetchPriority="high" loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />}
             </span>
             <span className="flex flex-col justify-center p-7 md:p-10">
               <span className="eyebrow">{lead.category}</span>

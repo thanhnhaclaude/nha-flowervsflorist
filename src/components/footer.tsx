@@ -52,8 +52,8 @@ export function Footer() {
               <span>{site.hours}</span>
             </li>
           </ul>
-          <div className="mt-6 flex gap-2">
-            {socials.map((s) => (
+          <div className="mt-6 flex gap-2 empty:hidden">
+            {socials.filter((s) => s.href).map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener" aria-label={s.label} className="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-rose-600">
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
                   <path d={s.d} />
@@ -81,8 +81,11 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-4 py-6 text-sm text-plum-100/80 md:flex-row md:items-center md:justify-between">
           <p>
-            © {new Date().getFullYear()} {site.name}. {site.domain} is owned and operated by <strong className="text-white">{site.company.displayName}</strong>, a {site.company.state} limited liability company,{" "}
-            {addressLine}.
+            © {new Date().getFullYear()} {site.name}. {site.domain} is an online flower shop owned and operated by{" "}
+            <a href={site.parent.url} target="_blank" rel="noopener" className="font-bold text-white underline-offset-2 hover:underline">
+              {site.company.displayName}
+            </a>
+            , a {site.company.state} limited liability company, {addressLine}.
           </p>
           <div className="flex flex-wrap items-center gap-2" aria-label="Accepted payment methods">
             {["Visa", "Mastercard", "Amex", "Discover", "Apple Pay", "Google Pay"].map((p) => (

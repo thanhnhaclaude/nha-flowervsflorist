@@ -38,10 +38,10 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-plum-900">
-        <Image src={img("hero/vibrant-bouquet")} alt="Colorful bouquet of sunflowers, roses and hydrangeas" fill priority sizes="100vw" className="object-cover object-[70%_center] opacity-90" />
+        <Image src={img("hero/vibrant-bouquet")} alt="Colorful bouquet of sunflowers, roses and hydrangeas" fill fetchPriority="high" loading="eager" quality={60} sizes="100vw" className="object-cover object-[70%_center] opacity-90" />
         <div className="absolute inset-0 bg-gradient-to-r from-plum-900/90 via-plum-900/75 to-plum-900/40 md:via-plum-900/55 md:to-plum-900/0" />
         <div className="container-x relative flex min-h-[540px] flex-col justify-center py-16 md:min-h-[600px]">
-          <div className="max-w-xl animate-fade-up text-white">
+          <div className="max-w-xl text-white">
             <CutoffCountdown />
             <h1 className="mt-5 text-[2.6rem] font-bold leading-[1.05] md:text-6xl">
               Flower Delivery,
@@ -62,7 +62,7 @@ export default async function HomePage() {
             <ul className="mt-8 flex flex-wrap gap-2">
               {["birthday-flowers", "sympathy-flowers", "roses", "anniversary-flowers"].map((s) => (
                 <li key={s}>
-                  <Link href={`/${s}`} className="inline-flex min-h-10 items-center rounded-full border border-white/40 px-4 text-sm font-bold text-white backdrop-blur-sm hover:bg-white hover:text-plum-700">
+                  <Link href={`/${s}`} className="inline-flex min-h-10 items-center rounded-full border border-white/40 px-4 text-sm font-bold text-white hover:bg-white hover:text-plum-700">
                     {categoryMap.get(s)!.name}
                   </Link>
                 </li>
@@ -88,7 +88,7 @@ export default async function HomePage() {
               <li key={slug}>
                 <Link href={`/${slug}`} className="group block">
                   <span className="relative block aspect-square overflow-hidden rounded-[var(--radius-card)] bg-petal">
-                    <Image src={img(c.image)} alt="" fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <Image src={img(c.image)} alt={`${c.name} flowers`} fill sizes="(min-width: 1280px) 300px, (min-width: 640px) 25vw, 50vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                     <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-plum-900/75 to-transparent" />
                     <span className="absolute bottom-3 left-3 right-3 font-display text-lg font-bold leading-tight text-white lg:left-4 lg:text-2xl">{c.name}</span>
                   </span>

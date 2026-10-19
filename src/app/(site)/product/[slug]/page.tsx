@@ -13,7 +13,7 @@ import { categoryMap } from "@/data/categories";
 import { toCard } from "@/lib/cards";
 import { formatDate, img, usd } from "@/lib/format";
 import { getProduct, getProductReviews, getRelated } from "@/lib/queries";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, returnPolicyJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -186,7 +186,8 @@ export default async function ProductPage({ params }: Props) {
             price: (product.price / 100).toFixed(2),
             availability: "https://schema.org/InStock",
             itemCondition: "https://schema.org/NewCondition",
-            seller: { "@type": "Organization", name: site.company.displayName },
+            seller: { "@type": "Organization", name: site.name, url: site.url },
+            hasMerchantReturnPolicy: returnPolicyJsonLd(),
             shippingDetails: {
               "@type": "OfferShippingDetails",
               shippingDestination: { "@type": "DefinedRegion", addressCountry: "US" },

@@ -17,7 +17,7 @@ export function PromoBar() {
     ));
   return (
     <div className="overflow-hidden bg-plum-700 text-[0.8125rem] font-bold text-white">
-      <div className="flex w-max animate-marquee py-2.5 hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee py-2.5 will-change-transform hover:[animation-play-state:paused]">
         {row(false)}
         {row(true)}
       </div>

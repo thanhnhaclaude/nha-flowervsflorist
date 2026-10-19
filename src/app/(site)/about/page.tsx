@@ -8,7 +8,7 @@ import { addressLine, site } from "@/lib/site";
 
 export const metadata = pageMeta({
   title: "About Us – Fresh Flowers, Florist-Crafted",
-  description: `Meet ${site.name}: an online flower shop operated by ${site.company.displayName} in Macon, Georgia, delivering hand-arranged flowers across the USA.`,
+  description: `Meet ${site.name}: an online flower shop owned and operated by ${site.company.displayName}, a Macon, Georgia company, delivering florist-arranged flowers across the USA.`,
   path: "/about",
   image: "brand/florist-studio",
 });
@@ -17,7 +17,7 @@ const values = [
   { icon: Sparkles, title: "Florist-crafted", text: "Every design is arranged by hand by skilled florists—never mass-assembled in a warehouse." },
   { icon: Leaf, title: "Fresh first", text: "We choose in-season, premium stems and ship them cool so they last longer at home." },
   { icon: Truck, title: "Fast & reliable", text: "Same-day delivery across the country when you order by 2 PM recipient's time." },
-  { icon: HeartHandshake, title: "Real people", text: "Our customer care team in Georgia answers the phone and fixes problems—fast." },
+  { icon: HeartHandshake, title: "Real people", text: "Our Macon, Georgia team answers the phone and email and personally resolves any problem." },
 ];
 
 export default function AboutPage() {
@@ -35,7 +35,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="relative aspect-[7/5] overflow-hidden rounded-[1.75rem] shadow-lift">
-            <Image src={img("brand/florist-studio")} alt="A florist arranging flowers in the studio" fill priority sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            <Image src={img("brand/florist-studio")} alt="A florist arranging flowers in the studio" fill fetchPriority="high" loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -62,12 +62,20 @@ export default function AboutPage() {
           <div className="prose-fvf">
             <h2 className="!mt-0">From Macon, Georgia to every corner of the U.S.</h2>
             <p>
-              {site.domain} is owned and operated by <strong>{site.company.displayName}</strong>, a {site.company.state} limited liability company headquartered at {addressLine}. Our team
-              curates every collection, sets our quality standards and supports every order personally.
+              {site.name} is an online flower shop owned and operated by <strong>{site.company.displayName}</strong>, a {site.company.state} limited liability company founded in 2012 and
+              headquartered at {addressLine}. M&amp;R is {site.parent.description}—learn more at{" "}
+              <a href={site.parent.url} target="_blank" rel="noopener">
+                mandr-group.com
+              </a>
+              .
             </p>
             <p>
-              When you place an order, we route it to a skilled florist near your recipient, who hand-arranges your design with fresh flowers and delivers it in person. That&apos;s how we deliver
-              beautiful flowers the same day—without boxes of wilted stems shipped across the country.
+              We built {site.name} to make sending flowers simple and dependable: a carefully curated collection, honest pricing with no hidden fees, and a real customer-care team that stands
+              behind every order.
+            </p>
+            <p>
+              When you place an order, we send it to a professional florist near your recipient, who hand-arranges your design with fresh flowers and delivers it in person. That&apos;s how we
+              can deliver beautiful flowers the same day—without boxes of stems shipped across the country.
             </p>
             <p>
               Questions or special requests? Call us at <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.
@@ -81,7 +89,8 @@ export default function AboutPage() {
         <dl className="card grid gap-x-10 gap-y-4 p-6 sm:grid-cols-2 md:p-8">
           {[
             ["Business name", site.company.legalName],
-            ["Doing business as", `${site.name} (${site.domain})`],
+            ["Online store", `${site.name} (${site.domain})`],
+            ["Parent company website", "www.mandr-group.com"],
             ["Business type", site.company.type],
             ["State of formation", site.company.state],
             ["Principal office", addressLine],

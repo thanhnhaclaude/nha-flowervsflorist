@@ -18,5 +18,10 @@ export function WishlistGrid({ products }: { products: CardProduct[] }) {
         </Link>
       </div>
     );
-  return <ProductGrid products={saved} />;
+  return (
+    <>
+      <h2 className="sr-only">Saved products</h2>
+      <ProductGrid products={saved} />
+    </>
+  );
 }

@@ -74,7 +74,7 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
           <div className="flex flex-wrap items-center gap-2">
             <span className="mr-1 text-sm font-extrabold text-plum-700">Color</span>
             {colors.map((c) => (
-              <Link key={c} href={href({ color: params.color === c ? undefined : c })} className={chip(params.color === c)} scroll={false} aria-pressed={params.color === c}>
+              <Link key={c} href={href({ color: params.color === c ? undefined : c })} className={chip(params.color === c)} scroll={false} aria-current={params.color === c ? "true" : undefined}>
                 <span className="h-4 w-4 rounded-full border border-black/10" style={{ background: COLOR_SWATCH[c] }} aria-hidden="true" />
                 <span className="capitalize">{c}</span>
               </Link>
@@ -103,6 +103,7 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
           </div>
         </div>
       </div>
+      <h2 className="sr-only">Products</h2>
       {shown.length ? (
         <ProductGrid products={shown.map(toCard)} priorityCount={4} />
       ) : (
