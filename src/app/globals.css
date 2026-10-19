@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/*
+ * FlowerVsFlorist design tokens — "vibrant mass-market florist":
+ * deep plum brand, rose-red conversion CTA, blush surfaces, gold accents, leaf green for delivery trust.
+ */
+@theme {
+  --color-plum-50: #fbf3f8;
+  --color-plum-100: #f5e3ee;
+  --color-plum-200: #ebc6dc;
+  --color-plum-500: #9b3478;
+  --color-plum-600: #7a1f5c;
+  --color-plum-700: #63184a;
+  --color-plum-800: #4d1239;
+  --color-plum-900: #340b26;
+
+  --color-rose-50: #fff1f3;
+  --color-rose-100: #ffe4e8;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-700: #be123c;
+
+  --color-blush: #fff5f8;
+  --color-petal: #fde8f0;
+  --color-gold: #f5a524;
+  --color-gold-soft: #fff4dc;
+  --color-leaf: #15803d;
+  --color-leaf-soft: #e8f6ec;
+
+  --color-ink: #2a1520;
+  --color-muted: #6b5560;
+  --color-line: #f0e2e9;
+  --color-card: #ffffff;
+  --color-danger: #c81e1e;
+
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(52 11 38 / 0.04), 0 8px 24px -12px rgb(52 11 38 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(52 11 38 / 0.05), 0 18px 40px -16px rgb(52 11 38 / 0.28);
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slide-in: slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 28s linear infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slide-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  a, button, [role="button"], summary, label[for], select { cursor: pointer; }
+  :focus-visible {
+    outline: 3px solid var(--color-rose-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection { background: var(--color-petal); }
+  input, select, textarea { font: inherit; }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-x { padding-inline: 1.5rem; }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-primary { background: var(--color-rose-600); color: #fff; box-shadow: 0 8px 20px -10px rgb(225 29 72 / 0.7); }
+  .btn-primary:hover { background: var(--color-rose-700); }
+  .btn-plum { background: var(--color-plum-600); color: #fff; }
+  .btn-plum:hover { background: var(--color-plum-700); }
+  .btn-outline { border: 2px solid var(--color-plum-600); color: var(--color-plum-600); background: #fff; }
+  .btn-outline:hover { background: var(--color-plum-50); }
+  .btn-white { background: #fff; color: var(--color-plum-700); }
+  .btn-white:hover { background: var(--color-petal); }
+  .btn-sm { min-height: 40px; padding: 0.5rem 1rem; font-size: 0.875rem; }
+
+  .field {
+    width: 100%;
+    min-height: 48px;
+    border: 1.5px solid #e3cfd9;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 0.7rem 0.9rem;
+    color: var(--color-ink);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field:hover { border-color: #d1b3c3; }
+  .field:focus { outline: none; border-color: var(--color-plum-600); box-shadow: 0 0 0 4px rgb(122 31 92 / 0.12); }
+  .field[aria-invalid="true"] { border-color: var(--color-danger); }
+  .label { display: block; margin-bottom: 0.375rem; font-size: 0.875rem; font-weight: 700; color: var(--color-ink); }
+  .error-text { margin-top: 0.375rem; font-size: 0.8125rem; color: var(--color-danger); font-weight: 600; }
+
+  .card { background: #fff; border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
+  .eyebrow { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-rose-600); }
+
+  .prose-fvf { color: #3d2630; font-size: 1.0625rem; line-height: 1.8; }
+  .prose-fvf h2 { margin: 2.25rem 0 0.75rem; font-size: 1.75rem; line-height: 1.25; color: var(--color-plum-700); scroll-margin-top: 120px; }
+  .prose-fvf h3 { margin: 1.75rem 0 0.5rem; font-size: 1.3rem; color: var(--color-plum-700); }
+  .prose-fvf p { margin: 0 0 1.1rem; }
+  .prose-fvf ul, .prose-fvf ol { margin: 0 0 1.25rem; padding-left: 1.4rem; }
+  .prose-fvf ul { list-style: disc; }
+  .prose-fvf ol { list-style: decimal; }
+  .prose-fvf li { margin: 0.35rem 0; }
+  .prose-fvf li::marker { color: var(--color-rose-600); }
+  .prose-fvf a { color: var(--color-rose-700); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .prose-fvf strong { color: var(--color-ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

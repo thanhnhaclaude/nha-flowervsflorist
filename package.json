@@ -1,0 +1,55 @@
+{
+  "name": "flowervsflorist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FlowerVsFlorist — flowervsflorist.com, operated by M&R Marketing Group, LLC",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:local": "tsx scripts/dev-db.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:setup": "tsx scripts/setup-db.ts",
+    "export-sql": "tsx scripts/export-sql.ts",
+    "hash-password": "tsx scripts/hash-password.ts",
+    "fetch-images": "node scripts/fetch-images.mjs"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^0.45.4",
+    "jose": "^6.2.12",
+    "lucide-react": "^1.58.0",
+    "mysql2": "^3.24.6",
+    "next": "16.4.2",
+    "nodemailer": "^10.1.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "stripe": "^23.0.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^20",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^18.0.8",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "mysql-memory-server": "^1.17.0",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "typescript-eslint": "^8.71.2"
+  },
+  "overrides": {
+    "esbuild": "^0.28.2"
+  }
+}
