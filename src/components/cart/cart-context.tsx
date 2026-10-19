@@ -12,7 +12,7 @@ export type CartLine = {
   image: string;
   price: number; // base price (Standard)
   hasSizes: boolean;
-  sameDay: boolean;
+  nextDay: boolean;
   size: string;
   addOns: string[];
   qty: number;
@@ -23,7 +23,7 @@ type CartContext = {
   ready: boolean;
   count: number;
   subtotal: number;
-  allSameDay: boolean;
+  allNextDay: boolean;
   drawerOpen: boolean;
   setDrawerOpen: (open: boolean) => void;
   add: (line: Omit<CartLine, "id" | "qty">, qty?: number) => void;
@@ -35,7 +35,7 @@ type CartContext = {
 };
 
 const Ctx = createContext<CartContext | null>(null);
-const KEY = "fvf_cart_v1";
+const KEY = "fvf_cart_v2";
 
 const lineId = (l: Pick<CartLine, "productId" | "size" | "addOns">) => `${l.productId}:${l.size}:${[...l.addOns].sort().join(",")}`;
 
@@ -79,13 +79,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<CartContext>(() => {
     const lineTotal = (l: CartLine) => unitPrice(l, l.size, l.addOns) * l.qty;
     const subtotal = lines.reduce((s, l) => s + lineTotal(l), 0);
-    const { deliveryFee } = computeTotals(subtotal, { sameDay: false });
+    const { deliveryFee } = computeTotals(subtotal);
     return {
       lines,
       ready,
       count: lines.reduce((s, l) => s + l.qty, 0),
       subtotal,
-      allSameDay: lines.length > 0 && lines.every((l) => l.sameDay),
+      allNextDay: lines.length > 0 && lines.every((l) => l.nextDay),
       drawerOpen,
       setDrawerOpen,
       add,

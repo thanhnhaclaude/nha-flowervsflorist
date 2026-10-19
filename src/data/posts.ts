@@ -102,7 +102,7 @@ Rare and enchanting, lavender roses symbolize love at first sight.
 - **24 roses** – “I'm yours forever”
 - **50+ roses** – unconditional, boundless love
 
-Ready to send? Every [rose bouquet](/roses) is eligible for [same-day delivery](/same-day-flower-delivery) when you order before 2 PM in the recipient's time zone.`,
+Ready to send? [Rose bouquets](/roses) marked Next-Day arrive tomorrow with [next-day delivery](/next-day-flower-delivery) when you order by 2 PM Eastern, Monday–Friday.`,
   },
   {
     slug: "best-birthday-flowers",
@@ -112,8 +112,8 @@ Ready to send? Every [rose bouquet](/roses) is eligible for [same-day delivery](
     category: "Occasions",
     publishedAt: "2026-09-16",
     seoTitle: "Best Birthday Flowers: 10 Ideas Everyone Loves",
-    seoDescription: "The best flowers for a birthday, plus birth month flowers for every month. Find the perfect birthday bouquet with same-day delivery.",
-    content: `Birthday flowers should feel like a celebration. Here are our florists' top picks.
+    seoDescription: "The best flowers for a birthday, plus birth month flowers for every month. Find the perfect birthday bouquet with next-day delivery.",
+    content: `Birthday flowers should feel like a celebration. Here are our top picks.
 
 ## 1. Sunflowers
 
@@ -240,40 +240,41 @@ Always sign with your full name, and your relationship if the family may not kno
 Browse our [sympathy and funeral flowers](/sympathy-flowers), or call us at (478) 219-8398 and we'll help you choose with care.`,
   },
   {
-    slug: "same-day-flower-delivery-guide",
-    title: "Same-Day Flower Delivery: How It Works & How to Get It",
-    excerpt: "Forgot a birthday? Here's exactly how same-day flower delivery works, the cut-off times and tips to make sure your flowers arrive today.",
+    slug: "next-day-flower-delivery-guide",
+    title: "Next-Day Flower Delivery: How It Works & How to Get Flowers Tomorrow",
+    excerpt: "Forgot a birthday? Here's exactly how next-day flower delivery works, the order cut-off, delivery days and tips to make sure your flowers arrive on time.",
     cover: "blog/same-day-tips",
     category: "Delivery",
     publishedAt: "2026-10-05",
-    seoTitle: "Same Day Flower Delivery Guide: Cut-off Times & Tips",
-    seoDescription: "How same-day flower delivery works: order cut-off times, delivery windows, Sunday delivery and tips for last-minute flowers.",
-    content: `We've all been there—an anniversary sneaks up, or you just heard a friend is in the hospital. Same-day flower delivery is here for exactly those moments.
+    seoTitle: "Next Day Flower Delivery Guide: Cut-off Times & Tips",
+    seoDescription: "How next-day flower delivery works: the 2 PM ET order cut-off, Tuesday–Saturday delivery days, shipping costs and tips for last-minute flowers.",
+    content: `We've all been there—an anniversary sneaks up, or you just heard a friend isn't feeling well. Next-day flower delivery is made for exactly those moments.
 
 ## How it works
 
-1. Choose a bouquet marked **Same-Day** on our site.
-2. Select **today's date** at checkout and add the recipient's address.
-3. Your order is sent to a florist near the recipient, who hand-arranges and delivers it, typically between noon and 8 PM.
+1. Choose a bouquet marked **Next-Day** on our site.
+2. Pick tomorrow's date at checkout (or any Tuesday–Saturday up to 90 days ahead) and add the recipient's address.
+3. We pack your flowers in a protective box with a water source and ship them overnight by FedEx or UPS. You'll get a tracking link by email.
 
-## Cut-off times
+## Cut-off times and delivery days
 
-- **Monday–Friday:** order by 2 PM in the recipient's time zone
-- **Saturday:** order by 12 PM
-- **Sunday:** available in select metro areas
+- **Monday–Thursday:** order by 2 PM Eastern Time for delivery the next day
+- **Friday:** order by 2 PM Eastern Time for Saturday delivery
+- **Weekends and holidays:** orders ship the next business day
+- Carriers don't deliver flowers on **Sundays or Mondays**
 
 ## Tips for on-time delivery
 
 - Double-check the address and include an apartment or suite number.
-- Add a working phone number for the recipient.
-- For hospitals, include the patient's room number. For businesses, include the company name and business hours.
-- Choose a delivery window if timing matters.
+- Add a working phone number for the recipient—the carrier may need it.
+- Sending to an office? Make sure someone will be there during business hours.
+- Carriers deliver by end of day and can't promise a specific time, so for events choose a date one day early.
 
-## What if I miss the cut-off?
+## When your flowers arrive
 
-Schedule next-day delivery—or call us at (478) 219-8398 and we'll do our best to help.
+Many stems ship in bud so they last longer. Trim the stems, place them in cool water with the flower food included, and they'll open beautifully over the next day or two. See our [flower care tips](/blog/how-to-make-flowers-last-longer).
 
-Ready? Browse [same-day flowers](/same-day-flower-delivery).`,
+Ready? Browse [next-day flowers](/next-day-flower-delivery).`,
   },
   {
     slug: "anniversary-flowers-by-year",
@@ -317,7 +318,7 @@ Recreate your wedding bouquet, choose your partner's favorite color, or go grand
     publishedAt: "2026-10-14",
     seoTitle: "Seasonal Flowers Guide: Best Flowers for Every Season",
     seoDescription: "Discover which flowers are in season in spring, summer, fall and winter for the freshest, most beautiful bouquets.",
-    content: `In-season flowers are fresher, last longer and often cost less. Here's what our florists love each season.
+    content: `In-season flowers are fresher, last longer and often cost less. Here's what we love each season.
 
 ## Spring
 

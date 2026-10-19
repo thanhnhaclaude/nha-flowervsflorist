@@ -92,8 +92,6 @@ export const IMAGES = {
   "p/thank-you-blush": ["photo-1561181286-d3fee7d55364", "product"],
   "p/peaceful-white-sympathy": ["photo-1769372742183-9495f9d1b303", "product"],
   "p/serene-calla-tribute": ["photo-1787788629138-58bd773bf157", "product"],
-  "p/heart-of-remembrance": ["photo-1758334587590-011cf260c10f", "product"],
-  "p/eternal-cross-tribute": ["photo-1758334587520-a3b772cea4f5", "product"],
   "p/white-chrysanthemum-comfort": ["photo-1759419281557-ebdca33c9263", "product"],
   "p/succulent-garden-trio": ["photo-1459156212016-c812468e2115", "product"],
   "p/aloe-vera-plant": ["photo-1509423350716-97f9360b4e09", "product"],

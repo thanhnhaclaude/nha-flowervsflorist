@@ -1,16 +1,16 @@
 # FlowerVsFlorist — flowervsflorist.com
 
-E-commerce flower shop with same-day delivery across the USA. Operated by **M&R Marketing Group, LLC**, 331 3rd Street, Macon, GA 31201.
+E-commerce flower shop with next-day delivery across the USA (bouquets shipped overnight by FedEx/UPS). Operated by **M&R Marketing Group, LLC**, 331 3rd Street, Macon, GA 31201.
 
 **Stack:** Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · MySQL + Drizzle ORM · Stripe Checkout · Nodemailer (SMTP)
 
 ## Features
 
-- **Storefront:** 47 products, 25 SEO category pages (occasions, flower types, collections), product pages with sizes (Standard/Deluxe/Premium) and add-ons, filters and sorting, search, wishlist
-- **Checkout:** delivery date picker with same-day cut-off (2 PM ET weekdays, 12 PM weekends), delivery windows, free card message, promo codes, Stripe Checkout (Apple Pay / Google Pay), "pay later" mode when Stripe isn't configured
+- **Storefront:** 45 products, 25 SEO category pages (occasions, flower types, collections), product pages with sizes (Standard/Deluxe/Premium) and add-ons, filters and sorting, search, wishlist
+- **Checkout:** delivery date picker with next-day rules (order by 2 PM ET Mon–Fri, Tuesday–Saturday delivery), free card message, promo codes, Stripe Checkout (Apple Pay / Google Pay), "pay later" mode when Stripe isn't configured
 - **Customers:** accounts, order history, saved addresses, wishlist sync, order tracking
-- **Content & SEO:** blog (8 articles), 51 state landing pages (`/flower-delivery/[state]`), JSON-LD (Florist, Product, Breadcrumb, FAQ, BlogPosting), sitemap.xml, robots.txt, canonical URLs
-- **Admin (`/admin`):** dashboard, orders (status updates + customer emails), products (with image upload), coupons, blog posts, review moderation, messages, subscribers (CSV export), customers
+- **Content & SEO:** blog (8 articles), 51 state landing pages (`/flower-delivery/[state]`), JSON-LD (OnlineStore, Product, Breadcrumb, FAQ, BlogPosting), sitemap.xml, robots.txt, canonical URLs
+- **Admin (`/admin`):** dashboard, orders (status updates, FedEx/UPS tracking numbers + customer emails), products (with image upload), coupons, blog posts, review moderation, messages, subscribers (CSV export), customers
 - **Emails:** order confirmation, new-order alert, status updates, newsletter welcome (WELCOME10), contact form
 
 ## Local development

@@ -38,9 +38,9 @@ export function ProductCard({ product, priority = false }: { product: CardProduc
         </Link>
         <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-1.5">
           {product.badge && <span className="rounded-full bg-rose-600 px-2.5 py-1 text-[0.6875rem] font-extrabold uppercase tracking-wide text-white">{product.badge}</span>}
-          {product.sameDay && (
+          {product.nextDay && (
             <span className="flex items-center gap-1 rounded-full bg-white/95 px-2.5 py-1 text-[0.6875rem] font-extrabold uppercase tracking-wide text-leaf">
-              <Truck className="h-3 w-3" /> Same-day
+              <Truck className="h-3 w-3" /> Next-day
             </span>
           )}
         </div>

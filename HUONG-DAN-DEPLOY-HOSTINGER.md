@@ -7,7 +7,7 @@ Thư mục `deploy/` trên máy bạn (không đưa lên GitHub) có:
 | File | Dùng để |
 |---|---|
 | `deploy/hostinger-env.txt` | Toàn bộ biến môi trường. **Mật khẩu admin** và `AUTH_SECRET` đã được tạo sẵn (xem dòng đầu file) |
-| `deploy/database.sql.gz` | Bản sao dữ liệu ban đầu: 47 sản phẩm, 8 bài blog, 2 mã giảm giá. Chỉ dùng khi muốn nhập tay, vì website **tự tạo bảng và dữ liệu** khi chạy lần đầu |
+| `deploy/database.sql.gz` | Bản sao dữ liệu ban đầu: 45 sản phẩm, 8 bài blog, 2 mã giảm giá. Chỉ dùng khi muốn nhập tay, vì website **tự tạo bảng và dữ liệu** khi chạy lần đầu |
 
 ---
 
@@ -63,7 +63,7 @@ Trong phần **Environment variables**, thêm **từng dòng** trong `deploy/hos
 
 ## Bước 7: Kiểm tra sau khi chạy
 
-- [ ] https://flowervsflorist.com/api/health → `"database":{"status":"ok","products":47,...}`. Các biến đã khai báo phải là `true`, `stripeMode` là `live` hoặc `test`.
+- [ ] https://flowervsflorist.com/api/health → `"database":{"status":"ok","products":45,...}`. Các biến đã khai báo phải là `true`, `stripeMode` là `live` hoặc `test`.
 - [ ] Trang chủ, https://flowervsflorist.com/roses, https://flowervsflorist.com/product/crimson-classic-dozen-red-roses
 - [ ] https://flowervsflorist.com/admin → đăng nhập user `admin`, mật khẩu ghi ở dòng đầu `deploy/hostinger-env.txt`
 - [ ] Đặt thử một đơn → thanh toán Stripe → trang "Thank you"; email xác nhận đến khách và đến `contact@flowervsflorist.com`; trong Stripe → Webhooks, sự kiện `checkout.session.completed` trả về 200
@@ -76,6 +76,17 @@ Trong phần **Environment variables**, thêm **từng dòng** trong `deploy/hos
 1. Thêm `flowervsflorist.com` vào **Google Search Console** và **Bing Webmaster Tools**, gửi sitemap `https://flowervsflorist.com/sitemap.xml`.
 2. **Google Business Profile:** chỉ tạo khi shop có nơi nhận/giao hoa thật tại Macon. Địa chỉ 331 3rd Street là văn phòng agency M&R, không phải tiệm hoa, nên không đăng ký làm "Florist" tại địa chỉ đó (Google có thể khóa hồ sơ).
 3. Thay ảnh Unsplash bằng ảnh thật của shop trong **Admin → Products → Upload images**.
+
+## Bước 9: Quy trình xử lý đơn (giao ngày hôm sau qua FedEx/UPS)
+
+Website hứa: **đặt trước 2 PM giờ miền Đông (ET), Thứ 2 – Thứ 6 → giao ngày hôm sau**; chỉ giao **Thứ 3 – Thứ 7**; không có giờ giao cố định. Để giữ đúng cam kết này:
+
+1. Chọn nhà cung cấp đóng gói và ship hoa (trang trại, nhà bán sỉ hoặc dịch vụ dropship hoa) có thể gửi FedEx/UPS Priority Overnight trong ngày.
+2. Mỗi ngày trước 2 PM ET: Admin → Orders → lọc "Order received", chuyển đơn cho nhà cung cấp, đổi trạng thái sang **Being prepared**.
+3. Khi có mã vận đơn: mở đơn → chọn hãng (FedEx/UPS/USPS) → nhập **Tracking number** → đổi trạng thái sang **Shipped** (giữ tick "Email the customer") → khách nhận email có link theo dõi.
+4. Sau khi giao: đổi sang **Delivered**.
+
+> Nếu nhà cung cấp có giờ chốt đơn hoặc ngày giao khác, sửa `cutoffHour` và `deliveryDays` trong `src/lib/site.ts`. Sản phẩm cần thêm 1 ngày chuẩn bị: bỏ tick "Next-day eligible" trong Admin → Products.
 
 ---
 

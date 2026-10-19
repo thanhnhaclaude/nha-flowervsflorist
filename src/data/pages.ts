@@ -10,37 +10,43 @@ export type InfoPage = { slug: string; title: string; seoTitle: string; descript
 export const infoPages: Record<string, InfoPage> = {
   "delivery-information": {
     slug: "delivery-information",
-    title: "Delivery Information",
-    seoTitle: "Flower Delivery Information: Same-Day, Fees & Cut-off Times",
-    description: "Same-day flower delivery cut-off times, delivery fees, delivery windows, and how we deliver to homes, businesses, hospitals and funeral homes.",
+    title: "Shipping & Delivery Information",
+    seoTitle: "Flower Delivery Information: Next-Day Shipping, Fees & Cut-off Times",
+    description: "Next-day flower delivery across the USA: 2 PM ET order cut-off, Tuesday–Saturday delivery days, overnight shipping fees, tracking and where we can deliver.",
     updated,
-    content: `## Same-day delivery
+    content: `## How we deliver
 
-Order a Same-Day eligible design **by 2 PM in the recipient's time zone, Monday–Friday** (by 12 PM on Saturday and Sunday) and it will be delivered today. Orders placed after the cut-off are delivered on the next available day.
+Every bouquet is carefully packed in a protective box with a water source and shipped **overnight by FedEx or UPS**. Many stems are shipped in bud, so they open beautifully at home and last longer. You'll receive an email with a **tracking link** as soon as your order ships.
 
-## Delivery fees
+## Next-day delivery & cut-off times
 
-- **Standard delivery:** ${usd(commerce.deliveryFee)} per order
-- **Free delivery** on orders of ${usd(commerce.freeDeliveryThreshold)} or more (before taxes and fees)
-- **Same-day priority:** ${usd(commerce.sameDayFee)} when you choose today's date
+- **Monday–Thursday:** order by **2 PM Eastern Time** and designs marked Next-Day arrive the following day.
+- **Friday:** order by 2 PM ET for **Saturday** delivery.
+- **After the cut-off, weekends and holidays:** your order ships on the next business day.
+- **Delivery days are Tuesday through Saturday.** Carriers don't deliver flowers on Sundays or Mondays.
+- Some designs (marked on the product page) need one extra day to prepare.
 
-You'll always see the exact total before you pay.
+## Shipping fees
 
-## Delivery windows
+- **Overnight shipping:** ${usd(commerce.deliveryFee)} per order
+- **Free shipping** on orders of ${usd(commerce.freeDeliveryThreshold)} or more (before taxes)
+- No hidden service fees—you'll always see the exact total before you pay.
 
-Deliveries are made between 8 AM and 8 PM. You can request a morning, afternoon or evening window at checkout; we do our best to honor it, but specific times cannot be guaranteed.
+## Delivery time of day
+
+Carriers deliver by end of day and can't guarantee a specific time. For an event or a specific occasion, we recommend choosing a delivery date one day early.
 
 ## Where we deliver
 
-We deliver to homes, businesses, hospitals, funeral homes and places of worship in all 50 states and Washington, D.C. We are unable to deliver to P.O. boxes, military APO/FPO addresses, or outside the United States.
+We ship to residential and business addresses throughout the continental United States. We can't deliver to P.O. boxes, military APO/FPO addresses, or outside the U.S. Some remote areas, Alaska and Hawaii may require an extra day.
 
-- **Hospitals:** include the patient's full name and room number. Some units (such as ICUs) do not accept flowers—please check first.
-- **Businesses:** include the company name and confirm the recipient will be there during business hours.
-- **Funeral homes:** include the name of the deceased and the service date/time in the delivery instructions.
+- **Businesses:** include the company name and make sure the recipient will be there during business hours.
+- **Hospitals:** many hospitals don't accept carrier deliveries to patient rooms—we recommend sending to the patient's home instead.
+- **Funeral services:** because carrier delivery times can't be guaranteed, we recommend sending sympathy flowers to the family home rather than to a service.
 
-## If the recipient isn't available
+## If the recipient isn't home
 
-The florist may leave the flowers in a safe place, with a neighbor or front desk, or reattempt delivery the next day. We'll contact you if we're unable to deliver.
+The carrier may leave the box at the door or in a safe place, or attempt delivery again the next business day. Please let the recipient know flowers are coming if you can, so they can be put in water promptly.
 
 ## Scheduling ahead
 
@@ -48,7 +54,7 @@ You can schedule delivery up to ${commerce.maxDaysAhead} days in advance—a gre
 
 ## Substitutions
 
-Every arrangement is hand-crafted. When a specific flower or container is unavailable, our florists may substitute flowers of equal or greater value while preserving the look, color palette and style of the design.
+Fresh flowers are seasonal. If a specific flower or container is unavailable, it may be replaced with one of equal or greater value while keeping the look, color palette and style of the design.
 
 Questions? Call **${site.phoneDisplay}** or email **${site.email}**.`,
   },
@@ -63,7 +69,7 @@ Questions? Call **${site.phoneDisplay}** or email **${site.email}**.`,
 
 ## Our guarantee
 
-If your flowers arrive damaged, wilted, noticeably different from what you ordered, or are delivered late through our error, contact us **within 7 days of the delivery date**. We'll offer a **free replacement** or a **full refund** of the affected item(s)—your choice.
+If your flowers arrive damaged, wilted, noticeably different from what you ordered, or arrive later than the delivery date you chose, contact us **within 7 days of the delivery date**. We'll offer a **free replacement** or a **full refund** of the affected item(s)—your choice.
 
 ## How to request help
 
@@ -73,14 +79,14 @@ If your flowers arrive damaged, wilted, noticeably different from what you order
 
 ## Cancellations & changes
 
-- Orders can be canceled or changed for a full refund **until 12 PM recipient's time the day before delivery**.
-- Same-day orders can be changed or canceled only if the florist hasn't started preparing them.
-- Once an order is out for delivery, it can't be canceled.
+- Orders can be canceled or changed for a full refund **until they ship** (orders ship by 2 PM ET the business day before delivery).
+- Once an order has shipped, it can't be canceled or redirected.
 
 ## When a refund may not apply
 
 - An incorrect or incomplete address or phone number was provided, or the recipient refused delivery.
-- Flowers were left in a safe place per the delivery instructions and later damaged by weather or handling.
+- The box was delivered as addressed and left unopened for an extended time, or was left outdoors in extreme weather at your request.
+- Delays caused by severe weather or carrier disruptions outside our control (we'll still work with you to make it right).
 - Natural variation in seasonal flowers or container substitutions of equal or greater value (see our [Delivery Information](/delivery-information)).
 
 ## Refund timing
@@ -159,14 +165,14 @@ ${site.company.displayName} · ${addressLine} · ${site.phoneDisplay} · ${site.
 
 ## How we use information
 
-- To process, deliver and support your orders, including sharing delivery details with the florist fulfilling your order.
+- To process, deliver and support your orders, including sharing delivery details with our fulfillment partners and shipping carriers (FedEx, UPS).
 - To send order confirmations and delivery updates.
 - To send marketing emails if you subscribe (you can unsubscribe anytime).
 - To prevent fraud and secure the Site, and to comply with legal obligations.
 
 ## How we share information
 
-We share information only with service providers who help us operate—such as our payment processor (Stripe), email provider, hosting provider and delivery florists—and when required by law. **We do not sell your personal information.**
+We share information only with service providers who help us operate—such as our payment processor (Stripe), email provider, hosting provider, fulfillment partners and shipping carriers—and when required by law. **We do not sell your personal information.**
 
 ## Cookies
 

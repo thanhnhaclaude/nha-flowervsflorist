@@ -29,7 +29,7 @@ export function QuickAdd({ product }: { product: CardProduct }) {
     <button
       type="button"
       onClick={() =>
-        add({ productId: product.id, slug: product.slug, name: product.name, image: product.images[0], price: product.price, hasSizes: product.hasSizes, sameDay: product.sameDay, size: "standard", addOns: [] })
+        add({ productId: product.id, slug: product.slug, name: product.name, image: product.images[0], price: product.price, hasSizes: product.hasSizes, nextDay: product.nextDay, size: "standard", addOns: [] })
       }
       className="absolute inset-x-3 bottom-3 hidden translate-y-2 rounded-full bg-plum-600 py-3 text-sm font-extrabold text-white opacity-0 transition-all duration-300 hover:bg-plum-700 focus-visible:translate-y-0 focus-visible:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 md:block"
     >

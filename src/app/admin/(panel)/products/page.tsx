@@ -25,7 +25,7 @@ export default async function ProductsPage() {
             <td className="px-4 py-2 font-bold">{usd(p.price)}</td>
             <td className="max-w-xs px-4 py-2 text-xs text-muted">{p.categories.join(", ")}</td>
             <td className="space-x-1 px-4 py-2">
-              {p.sameDay && <Badge value="delivered" label="same-day" />}
+              {p.nextDay && <Badge value="delivered" label="next-day" />}
               {p.bestSeller && <Badge value="processing" label="best seller" />}
               {p.featured && <Badge value="out_for_delivery" label="featured" />}
             </td>

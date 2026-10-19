@@ -25,9 +25,9 @@ export function unitPrice(product: PriceableProduct, size: string, extras: reado
 
 export type CouponLike = { type: "percent" | "fixed" | "free_delivery"; value: number; minSubtotal: number };
 
-export function computeTotals(subtotal: number, opts: { sameDay: boolean; coupon?: CouponLike | null }) {
+export function computeTotals(subtotal: number, opts: { coupon?: CouponLike | null } = {}) {
   let deliveryFee = subtotal >= commerce.freeDeliveryThreshold ? 0 : commerce.deliveryFee;
-  const sameDayFee = opts.sameDay ? commerce.sameDayFee : 0;
+  const sameDayFee = 0; // legacy column on orders; next-day shipping has no rush fee
   let discount = 0;
   const c = opts.coupon;
   if (c && subtotal >= c.minSubtotal) {

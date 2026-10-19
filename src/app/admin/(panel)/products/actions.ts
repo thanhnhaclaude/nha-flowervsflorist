@@ -52,7 +52,7 @@ export async function saveProduct(_: ProductFormState, fd: FormData): Promise<Pr
     categories,
     colors: fd.getAll("colors").map(String),
     images,
-    sameDay: fd.get("sameDay") === "on",
+    nextDay: fd.get("nextDay") === "on",
     bestSeller: fd.get("bestSeller") === "on",
     featured: fd.get("featured") === "on",
     hasSizes: fd.get("hasSizes") === "on",

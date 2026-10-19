@@ -10,7 +10,7 @@ import { SIZES, unitPrice } from "@/lib/pricing";
 import { addOns } from "@/lib/site";
 import { usd } from "@/lib/format";
 
-type P = { id: number; slug: string; name: string; price: number; images: string[]; hasSizes: boolean; sameDay: boolean };
+type P = { id: number; slug: string; name: string; price: number; images: string[]; hasSizes: boolean; nextDay: boolean };
 
 export function PurchasePanel({ product }: { product: P }) {
   const router = useRouter();
@@ -23,7 +23,7 @@ export function PurchasePanel({ product }: { product: P }) {
   const each = unitPrice(product, size, extras);
   const saved = wishlist.has(product.id);
 
-  const line = () => ({ productId: product.id, slug: product.slug, name: product.name, image: product.images[0], price: product.price, hasSizes: product.hasSizes, sameDay: product.sameDay, size, addOns: extras });
+  const line = () => ({ productId: product.id, slug: product.slug, name: product.name, image: product.images[0], price: product.price, hasSizes: product.hasSizes, nextDay: product.nextDay, size, addOns: extras });
 
   return (
     <div>

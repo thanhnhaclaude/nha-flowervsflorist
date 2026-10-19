@@ -28,7 +28,7 @@ export function Footer() {
         <div>
           <Logo light />
           <p className="mt-5 max-w-sm text-[0.95rem] leading-relaxed text-plum-100/90">
-            Fresh, hand-arranged flowers for every moment—delivered same day across the United States. Every bouquet is backed by our 100% satisfaction guarantee.
+            Fresh flowers for every moment—shipped overnight for next-day delivery across the United States. Every bouquet is backed by our 100% satisfaction guarantee.
           </p>
           <ul className="mt-6 space-y-3 text-[0.95rem]">
             <li className="flex gap-3">

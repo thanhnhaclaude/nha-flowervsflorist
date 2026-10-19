@@ -32,7 +32,7 @@ export const mainMenu: MenuItem[] = [
         ],
       },
     ],
-    feature: { title: "Birthday Best Sellers", href: "/birthday-flowers", image: "cat/birthday", text: "Bright bouquets delivered today" },
+    feature: { title: "Birthday Best Sellers", href: "/birthday-flowers", image: "cat/birthday", text: "Bright bouquets delivered tomorrow" },
   },
   {
     label: "Flowers",
@@ -63,7 +63,7 @@ export const mainMenu: MenuItem[] = [
     ],
     feature: { title: "The Rose Shop", href: "/roses", image: "cat/roses", text: "A dozen roses from $64.99" },
   },
-  { label: "Same-Day Delivery", href: "/same-day-flower-delivery", highlight: true },
+  { label: "Next-Day Delivery", href: "/next-day-flower-delivery", highlight: true },
   { label: "Best Sellers", href: "/best-sellers" },
   { label: "Sympathy", href: "/sympathy-flowers" },
   { label: "Plants & Gifts", href: "/flower-gifts", groups: [{ title: "Gifts", links: [{ label: "Plants & Succulents", href: "/plants" }, { label: "Orchid Plants", href: "/orchids" }, { label: "Flower Gift Boxes", href: "/flower-gifts" }] }] },
@@ -74,7 +74,7 @@ export const footerMenu: MenuGroup[] = [
   {
     title: "Shop",
     links: [
-      { label: "Same-Day Flower Delivery", href: "/same-day-flower-delivery" },
+      { label: "Next-Day Flower Delivery", href: "/next-day-flower-delivery" },
       { label: "Best Sellers", href: "/best-sellers" },
       { label: "Birthday Flowers", href: "/birthday-flowers" },
       { label: "Sympathy Flowers", href: "/sympathy-flowers" },

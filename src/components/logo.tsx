@@ -21,7 +21,7 @@ export function Logo({ light = false }: { light?: boolean }) {
           Flower<span className={`italic ${light ? "text-gold" : "text-rose-600"}`}>Vs</span>Florist
         </span>
         <span className={`mt-1 hidden text-[0.625rem] font-extrabold uppercase tracking-[0.22em] sm:block ${light ? "text-plum-100" : "text-muted"}`}>
-          Same-day flower delivery
+          Next-day flower delivery
         </span>
       </span>
     </span>

@@ -23,12 +23,12 @@ export const categories: Category[] = [
     slug: "birthday-flowers",
     name: "Birthday",
     group: "occasion",
-    h1: "Birthday Flowers & Same-Day Birthday Delivery",
-    seoTitle: "Birthday Flowers Delivery | Same-Day Birthday Bouquets",
+    h1: "Birthday Flowers Delivered Tomorrow",
+    seoTitle: "Birthday Flowers Delivery | Next-Day Birthday Bouquets",
     seoDescription:
-      "Send birthday flowers today. Bright, florist-designed birthday bouquets with same-day delivery across the USA. Add balloons, chocolates and a free card message.",
+      "Send birthday flowers online. Bright birthday bouquets shipped overnight for next-day delivery anywhere in the USA. Add balloons, chocolates and a free card message.",
     intro:
-      "Make their day unforgettable with a burst of color. Our birthday bouquets are hand-arranged by local florists and can arrive today when you order before 2 PM in the recipient's time zone.",
+      "Make their day unforgettable with a burst of color. Order by 2 PM ET Monday–Friday and your birthday bouquet ships overnight to arrive the next day—or schedule it for their big day up to 90 days ahead.",
     image: "cat/birthday",
     body: [
       {
@@ -36,12 +36,12 @@ export const categories: Category[] = [
         text: "Think about their favorite color, their personality and where the flowers will live. Cheerful sunflowers and gerbera daisies suit a sunny office desk, while blush roses and peonies bring softness to a living room. Every arrangement includes a free personalized card message so your words arrive with the blooms.",
       },
       {
-        heading: "Last-minute? We deliver birthday flowers today",
-        text: "Forgot until this morning? It happens. Choose any bouquet marked Same-Day, pick today's date at checkout and our florist partners will hand-deliver it this afternoon or evening. Need it to be extra special? Add a balloon, a plush bear or gourmet truffles.",
+        heading: "Last-minute? Birthday flowers delivered tomorrow",
+        text: "Forgot until today? It happens. Order a bouquet marked Next-Day before 2 PM Eastern (Monday–Friday) and it ships overnight to arrive tomorrow, Tuesday through Saturday. Need it to be extra special? Add a balloon, a plush bear or gourmet truffles.",
       },
     ],
     faqs: [
-      { q: "Can I get birthday flowers delivered today?", a: "Yes. Order any Same-Day eligible bouquet before 2 PM in the recipient's local time, Monday–Saturday, and it will be hand-delivered today." },
+      { q: "Can I get birthday flowers delivered tomorrow?", a: "Yes. Order any Next-Day bouquet before 2 PM Eastern Time, Monday–Friday, and it ships overnight for delivery the next day (Tuesday–Saturday)." },
       { q: "What are the best flowers for a birthday?", a: "Bright mixed bouquets, sunflowers, gerbera daisies and pink roses are our most-gifted birthday flowers. You can also choose their birth-month flower for a thoughtful touch." },
       { q: "Can I include a message and a gift?", a: "Every order includes a free card message. You can add balloons, chocolates, a teddy bear or a premium vase on the product page." },
     ],
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     h1: "Anniversary Flowers Delivered",
     seoTitle: "Anniversary Flowers Delivery | Romantic Roses & Bouquets",
     seoDescription:
-      "Celebrate every year together with romantic anniversary flowers. Red roses, peonies and luxury bouquets delivered same day across the US.",
+      "Celebrate every year together with romantic anniversary flowers. Red roses, peonies and luxury bouquets with next-day delivery across the US.",
     intro:
       "From the first year to the fiftieth, say what words can't with romantic anniversary flowers—classic red roses, lush peonies and elegant designs your partner will remember.",
     image: "cat/anniversary",
@@ -64,7 +64,7 @@ export const categories: Category[] = [
       },
       {
         heading: "Anniversary flowers by year",
-        text: "Traditional anniversary flowers include carnations for the 1st year, lily of the valley for the 2nd, sunflowers for the 3rd, daisies for the 5th, and roses for the 15th. Our florists are happy to help match your bouquet to the year you are celebrating.",
+        text: "Traditional anniversary flowers include carnations for the 1st year, lily of the valley for the 2nd, sunflowers for the 3rd, daisies for the 5th, and roses for the 15th. Our customer care team is happy to help you match a bouquet to the year you are celebrating.",
       },
     ],
   },
@@ -73,25 +73,25 @@ export const categories: Category[] = [
     name: "Sympathy & Funeral",
     group: "occasion",
     h1: "Sympathy & Funeral Flowers",
-    seoTitle: "Sympathy Flowers & Funeral Flower Delivery | Same Day",
+    seoTitle: "Sympathy Flowers Delivery | Condolence Bouquets & Plants",
     seoDescription:
-      "Express your condolences with sympathy flowers and funeral arrangements. Peaceful white bouquets, wreaths and standing tributes delivered same day to homes and funeral homes.",
+      "Express your condolences with sympathy flowers. Peaceful white bouquets, lilies and orchid plants shipped overnight to the family home anywhere in the USA.",
     intro:
-      "When words feel inadequate, flowers offer comfort. Our sympathy arrangements are designed with care and delivered with discretion to homes, funeral homes and places of worship.",
+      "When words feel inadequate, flowers offer comfort. Our sympathy bouquets and plants are chosen with care and shipped overnight to the family home anywhere in the U.S.",
     image: "cat/sympathy",
     body: [
       {
         heading: "Choosing sympathy flowers",
-        text: "Arrangements sent to the family's home are typically smaller vase designs or plants that can be enjoyed for weeks. For a service, wreaths, hearts and standing tributes are displayed near the casket or memorial. White lilies, roses and chrysanthemums are traditional choices that convey peace and remembrance.",
+        text: "Arrangements sent to the family's home are typically smaller vase designs or plants that can be enjoyed for weeks. Standing sprays and wreaths for a service are best ordered from a florist near the venue. White lilies, roses and chrysanthemums are traditional choices that convey peace and remembrance.",
       },
       {
-        heading: "Funeral flower delivery you can rely on",
-        text: "Include the name of the deceased, the funeral home and the service time in the delivery instructions and our team will coordinate timing directly with the venue. Need help choosing? Call us at (478) 219-8398 and we'll guide you with compassion.",
+        heading: "Sending sympathy to the family home",
+        text: "Many families appreciate flowers in the days and weeks after a service, when support often fades. Add a heartfelt card message and choose a delivery date that works for them. Need help choosing? Call us at (478) 219-8398 and we'll guide you with compassion.",
       },
     ],
     faqs: [
       { q: "What should I write on a sympathy card?", a: "Keep it short and sincere, e.g. \"With deepest sympathy,\" \"Holding you close in our thoughts,\" or \"Forever in our hearts.\" Sign with your full name so the family knows who sent it." },
-      { q: "Can you deliver to a funeral home today?", a: "Yes. Order before 2 PM local time and add the funeral home name and service time in the delivery instructions; we coordinate directly with the venue." },
+      { q: "Can you deliver to a funeral home?", a: "We can ship to a funeral home, but carriers deliver by end of day and can't guarantee a time, so flowers may arrive after a service. For the service itself, a local florist is the best choice; our bouquets and plants are ideal for comforting the family at home." },
     ],
   },
   {
@@ -101,7 +101,7 @@ export const categories: Category[] = [
     h1: "Love & Romance Flowers",
     seoTitle: "Romantic Flowers Delivery | Red Roses for Love & Romance",
     seoDescription:
-      "Sweep them off their feet with romantic flowers. Red roses, pink rose bouquets and luxury arrangements with same-day delivery nationwide.",
+      "Sweep them off their feet with romantic flowers. Red roses, pink rose bouquets and luxury arrangements with next-day delivery nationwide.",
     intro: "Just because, date night or a big question—romantic flowers say “I love you” beautifully.",
     image: "cat/love-romance",
     body: [
@@ -118,7 +118,7 @@ export const categories: Category[] = [
     h1: "Get Well Soon Flowers",
     seoTitle: "Get Well Flowers Delivery | Cheerful Get Well Soon Bouquets",
     seoDescription:
-      "Brighten their recovery with get well flowers. Cheerful sunflowers, tulips and plants delivered same day to homes and hospitals across the USA.",
+      "Brighten their recovery with get well flowers. Cheerful sunflowers, tulips and plants delivered next day to homes across the USA.",
     intro: "Sunny blooms are proven mood boosters. Send cheerful get well flowers to help someone feel better, faster.",
     image: "cat/get-well",
     body: [
@@ -135,7 +135,7 @@ export const categories: Category[] = [
     h1: "Congratulations Flowers",
     seoTitle: "Congratulations Flowers Delivery | Graduation & New Job Bouquets",
     seoDescription:
-      "Celebrate big wins with congratulations flowers. Vibrant bouquets for graduations, promotions, new homes and more—delivered same day.",
+      "Celebrate big wins with congratulations flowers. Vibrant bouquets for graduations, promotions, new homes and more—delivered next day.",
     intro: "New job, graduation, new home or a big promotion—celebrate their achievement with a bouquet as bright as their future.",
     image: "cat/congratulations",
     body: [
@@ -151,7 +151,7 @@ export const categories: Category[] = [
     group: "occasion",
     h1: "Thank You Flowers",
     seoTitle: "Thank You Flowers Delivery | Send Gratitude Bouquets",
-    seoDescription: "Say thank you with flowers. Elegant thank-you bouquets for teachers, hosts, colleagues and friends with same-day delivery.",
+    seoDescription: "Say thank you with flowers. Elegant thank-you bouquets for teachers, hosts, colleagues and friends with next-day delivery.",
     intro: "Gratitude grows when you share it. Thank a host, teacher, colleague or friend with fresh, hand-tied blooms.",
     image: "cat/thank-you",
     body: [
@@ -185,7 +185,7 @@ export const categories: Category[] = [
     seoTitle: "Mother's Day Flowers Delivery | Bouquets for Mom",
     seoDescription:
       "Show Mom how much she means with Mother's Day flowers. Peonies, roses, tulips and gift sets delivered nationwide. Order early for guaranteed delivery.",
-    intro: "She deserves the very best. Pick her favorites—or let our florists design something as unique as she is.",
+    intro: "She deserves the very best. Pick her favorites and schedule delivery for the perfect day.",
     image: "cat/peonies",
     body: [
       {
@@ -217,10 +217,10 @@ export const categories: Category[] = [
     name: "Roses",
     group: "flower",
     h1: "Roses Delivery",
-    seoTitle: "Roses Delivery | Send a Dozen Roses Online Today",
+    seoTitle: "Roses Delivery | Send a Dozen Roses Online",
     seoDescription:
-      "Send roses online with same-day rose delivery. Dozen red roses, pink roses, rose boxes and mixed rose bouquets from expert florists.",
-    intro: "The world's favorite flower, arranged by expert florists. Choose from red, pink, yellow and mixed rose bouquets.",
+      "Send roses online with next-day rose delivery. Dozen red roses, pink roses, rose boxes and mixed rose bouquets, shipped fresh nationwide.",
+    intro: "The world's favorite flower, carefully packed and shipped fresh. Choose from red, pink, peach and mixed rose bouquets.",
     image: "cat/roses",
     body: [
       {
@@ -234,7 +234,7 @@ export const categories: Category[] = [
     ],
     faqs: [
       { q: "How much does a dozen roses cost?", a: "Our Classic Dozen Red Roses start at $64.99, with Deluxe and Premium sizes that add more stems and a designer vase." },
-      { q: "Can I send roses same day?", a: "Yes—every rose bouquet is eligible for same-day delivery when ordered before 2 PM in the recipient's time zone." },
+      { q: "Can I get roses delivered tomorrow?", a: "Yes—rose bouquets marked Next-Day ship overnight when you order by 2 PM Eastern Time, Monday–Friday, for delivery Tuesday–Saturday." },
     ],
   },
   {
@@ -242,8 +242,8 @@ export const categories: Category[] = [
     name: "Sunflowers",
     group: "flower",
     h1: "Sunflower Bouquets",
-    seoTitle: "Sunflower Delivery | Sunflower Bouquets Delivered Today",
-    seoDescription: "Brighten any day with sunflower delivery. Cheerful sunflower bouquets and arrangements with same-day delivery across the USA.",
+    seoTitle: "Sunflower Delivery | Sunflower Bouquets Delivered Tomorrow",
+    seoDescription: "Brighten any day with sunflower delivery. Cheerful sunflower bouquets with next-day delivery across the USA.",
     intro: "Pure sunshine in a vase. Sunflowers symbolize loyalty, adoration and happiness.",
     image: "cat/sunflowers",
     body: [{ heading: "Why everyone loves sunflowers", text: "Sunflowers are bold, happy and long-lasting, making them perfect for birthdays, get well wishes and thank-yous. They pair beautifully with roses, daisies and greenery." }],
@@ -254,7 +254,7 @@ export const categories: Category[] = [
     group: "flower",
     h1: "Tulip Delivery",
     seoTitle: "Tulip Delivery | Fresh Tulip Bouquets Online",
-    seoDescription: "Send fresh tulips with same-day delivery. Pink, white and mixed tulip bouquets hand-arranged by local florists.",
+    seoDescription: "Send fresh tulips with next-day delivery. Pink, white and mixed tulip bouquets shipped fresh nationwide.",
     intro: "Graceful and elegant, tulips are the flower of spring and perfect love.",
     image: "cat/tulips",
     body: [{ heading: "Tulips keep growing", text: "Did you know tulips keep growing up to an inch after they're cut? They gracefully bend toward the light, giving each arrangement a living, artful shape." }],
@@ -287,10 +287,10 @@ export const categories: Category[] = [
     group: "flower",
     h1: "Peony Bouquets",
     seoTitle: "Peony Delivery | Luxurious Peony Bouquets",
-    seoDescription: "Lush, romantic peony bouquets for delivery. Pink and white peonies arranged by expert florists—perfect for Mother's Day and anniversaries.",
+    seoDescription: "Lush, romantic peony bouquets for delivery. Pink and white peonies—perfect for Mother's Day and anniversaries.",
     intro: "Romantic, ruffled and lush—peonies symbolize a happy life and good fortune.",
     image: "cat/peonies",
-    body: [{ heading: "Peony season", text: "Peonies peak from late spring into early summer. Our florists source the most beautiful stems from growers around the world so you can send them more of the year." }],
+    body: [{ heading: "Peony season", text: "Peonies peak from late spring into early summer. We source beautiful stems from growers around the world so you can send them more of the year." }],
   },
   {
     slug: "hydrangeas",
@@ -298,7 +298,7 @@ export const categories: Category[] = [
     group: "flower",
     h1: "Hydrangea Arrangements",
     seoTitle: "Hydrangea Delivery | Hydrangea Bouquets & Arrangements",
-    seoDescription: "Full, cloud-like hydrangea arrangements with roses and seasonal blooms, delivered same day.",
+    seoDescription: "Full, cloud-like hydrangea arrangements with roses and seasonal blooms, delivered next day.",
     intro: "Big, beautiful blooms with a romantic, garden-gathered feel.",
     image: "cat/hydrangeas",
     body: [{ heading: "Hydrangea care", text: "Hydrangeas drink through their petals too—mist them daily and keep the vase full of cool water." }],
@@ -309,10 +309,10 @@ export const categories: Category[] = [
     group: "flower",
     h1: "Fresh Flower Bouquets",
     seoTitle: "Flower Bouquets Delivery | Fresh Mixed Bouquets Online",
-    seoDescription: "Shop fresh flower bouquets online. Colorful mixed bouquets, wildflowers and seasonal designs delivered same day nationwide.",
-    intro: "Our florists' favorite seasonal blooms, gathered into colorful, one-of-a-kind bouquets.",
+    seoDescription: "Shop fresh flower bouquets online. Colorful mixed bouquets, wildflowers and seasonal designs delivered next day nationwide.",
+    intro: "Our favorite seasonal blooms, gathered into colorful, one-of-a-kind bouquets.",
     image: "cat/mixed",
-    body: [{ heading: "Florist's choice", text: "Mixed bouquets showcase what's freshest and most beautiful each season. Color palettes stay true to the photo while individual stems may vary slightly." }],
+    body: [{ heading: "Seasonal favorites", text: "Mixed bouquets showcase what's freshest and most beautiful each season. Color palettes stay true to the photo while individual stems may vary slightly." }],
   },
   {
     slug: "plants",
@@ -328,30 +328,31 @@ export const categories: Category[] = [
 
   // ───────────── Collections ─────────────
   {
-    slug: "same-day-flower-delivery",
-    name: "Same-Day Delivery",
+    slug: "next-day-flower-delivery",
+    name: "Next-Day Delivery",
     group: "collection",
-    h1: "Same-Day Flower Delivery",
-    seoTitle: "Same Day Flower Delivery | Send Flowers Today Nationwide",
+    h1: "Next-Day Flower Delivery",
+    seoTitle: "Next Day Flower Delivery | Flowers Delivered Tomorrow Nationwide",
     seoDescription:
-      "Need flowers today? Same-day flower delivery across the USA, hand-arranged by local florists. Order before 2 PM recipient's time, Monday–Saturday.",
+      "Need flowers fast? Next-day flower delivery anywhere in the USA. Order by 2 PM ET Monday–Friday and your bouquet ships overnight to arrive tomorrow, Tuesday–Saturday.",
     intro:
-      "Order before 2 PM in the recipient's time zone and a local florist will hand-arrange and deliver your flowers today—Monday through Saturday, in all 50 states.",
+      "Order by 2 PM Eastern Time, Monday through Friday, and your bouquet ships overnight by FedEx or UPS to arrive the next day—anywhere in the continental U.S., Tuesday through Saturday.",
     image: "cat/same-day",
     body: [
       {
-        heading: "How same-day flower delivery works",
-        text: "When you place an order, it's sent to a trusted local florist near your recipient. They hand-arrange your bouquet using fresh, in-season flowers and deliver it in person—usually between noon and 8 PM. You'll get an email the moment your order is confirmed.",
+        heading: "How next-day flower delivery works",
+        text: "Your flowers are carefully packed in a protective box with a water source and shipped overnight. Many stems arrive in bud so they open beautifully at home and last longer. You'll get an email with tracking as soon as your order ships.",
       },
       {
-        heading: "Same-day cut-off times",
-        text: "Monday–Friday: order by 2 PM recipient's local time. Saturday: order by 12 PM. Sunday delivery is available in select metro areas. Orders placed after the cut-off are delivered the next available day.",
+        heading: "Cut-off times & delivery days",
+        text: "Monday–Thursday: order by 2 PM ET for delivery the next day. Friday: order by 2 PM ET for Saturday delivery. Orders placed after the cut-off, on weekends or holidays ship the next business day. Carriers don't deliver flowers on Sundays or Mondays.",
       },
     ],
     faqs: [
-      { q: "Can flowers be delivered on the same day?", a: "Yes. Every bouquet in this collection can be delivered today when ordered before the cut-off time in the recipient's time zone." },
-      { q: "How much is same-day delivery?", a: "Standard delivery is $12.99, plus a $5 same-day priority fee. Orders over $79 ship free (same-day fee still applies)." },
-      { q: "Do you deliver on Sundays?", a: "Sunday delivery is available in many major cities. Choose Sunday at checkout; if it's not available in that ZIP code we'll contact you." },
+      { q: "Can I get flowers delivered tomorrow?", a: "Yes. Order any Next-Day bouquet before 2 PM Eastern Time, Monday–Friday, and it arrives the next day (Tuesday–Saturday) by end of day." },
+      { q: "How much is next-day delivery?", a: "Overnight shipping is $12.99 per order and free on orders of $79 or more. There are no hidden service fees." },
+      { q: "Do you deliver on Sundays or Mondays?", a: "No. Our carriers deliver flowers Tuesday through Saturday. Choose any of those days at checkout, up to 90 days in advance." },
+      { q: "Can I choose a delivery time?", a: "Carriers deliver by end of day and can't guarantee a specific time. For time-sensitive events, choose a delivery date one day early." },
     ],
   },
   {
@@ -360,7 +361,7 @@ export const categories: Category[] = [
     group: "collection",
     h1: "Best-Selling Flowers",
     seoTitle: "Best Selling Flowers | Our Most Popular Bouquets",
-    seoDescription: "Shop our best-selling flowers—customer-favorite roses, sunflowers and mixed bouquets with same-day delivery.",
+    seoDescription: "Shop our best-selling flowers—customer-favorite roses, sunflowers and mixed bouquets with next-day delivery.",
     intro: "The bouquets our customers send again and again. Loved, reviewed and always delivered fresh.",
     image: "cat/mixed",
     body: [{ heading: "Customer favorites", text: "These designs are the ones our customers choose most often for freshness, value and wow-factor—an easy choice for any occasion." }],
@@ -382,10 +383,10 @@ export const categories: Category[] = [
     group: "collection",
     h1: "Cheap Flowers Delivery – Bouquets Under $50",
     seoTitle: "Cheap Flower Delivery | Beautiful Flowers Under $50",
-    seoDescription: "Affordable flowers, never cheap-looking. Beautiful bouquets under $50 with same-day flower delivery nationwide.",
-    intro: "Beautiful, budget-friendly bouquets that still arrive fresh, full and florist-arranged.",
+    seoDescription: "Affordable flowers, never cheap-looking. Beautiful bouquets under $50 with next-day flower delivery nationwide.",
+    intro: "Beautiful, budget-friendly bouquets that still arrive fresh, full and beautifully arranged.",
     image: "cat/tulips",
-    body: [{ heading: "Affordable without compromise", text: "Our under-$50 bouquets use the same fresh flowers and expert florists as every other design—just in a smaller, perfectly-proportioned size." }],
+    body: [{ heading: "Affordable without compromise", text: "Our under-$50 bouquets use the same fresh flowers and careful packing as every other design—just in a smaller, perfectly-proportioned size." }],
   },
   {
     slug: "flower-gifts",
@@ -393,7 +394,7 @@ export const categories: Category[] = [
     group: "collection",
     h1: "Flower Gifts & Gift Boxes",
     seoTitle: "Flower Gifts Delivery | Flowers in a Box & Gift Sets",
-    seoDescription: "Flowers in a box, bouquet gift sets and blooming gift crates—delivered same day. The perfect flower gift for any occasion.",
+    seoDescription: "Flowers in a box, bouquet gift sets and blooming gift crates—delivered next day. The perfect flower gift for any occasion.",
     intro: "Flowers plus a little something extra—beautifully boxed and ready to give.",
     image: "cat/gifts",
     body: [{ heading: "Make it a gift set", text: "Pair any bouquet with chocolates, a balloon or a plush bear at checkout, or choose a ready-made flower box for an unforgettable unboxing moment." }],

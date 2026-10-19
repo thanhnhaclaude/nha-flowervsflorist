@@ -70,8 +70,8 @@ export function Faq({ faqs, title = "Frequently Asked Questions" }: { faqs: { q:
 }
 
 const trust = [
-  { icon: Truck, title: "Same-Day Delivery", text: "Order by 2 PM recipient's time" },
-  { icon: Sparkles, title: "Hand-Arranged Fresh", text: "Designed by expert florists" },
+  { icon: Truck, title: "Next-Day Delivery", text: "Order by 2 PM ET, Mon–Fri" },
+  { icon: Sparkles, title: "Fresh & Protected", text: "Packed with water, shipped overnight" },
   { icon: HeartHandshake, title: "100% Satisfaction", text: "Love it or we'll make it right" },
   { icon: Lock, title: "Secure Checkout", text: "Encrypted payments via Stripe" },
 ];

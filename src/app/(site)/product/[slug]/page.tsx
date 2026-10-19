@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = await getProduct((await params).slug);
   if (!p) return {};
   return pageMeta({
-    title: `${p.name} – ${usd(p.price)}${p.sameDay ? " | Same-Day Delivery" : ""}`,
-    description: `${p.short} Order ${p.name} online${p.sameDay ? " for same-day flower delivery" : ""} from ${site.name}. Free card message included.`.slice(0, 300),
+    title: `${p.name} – ${usd(p.price)}${p.nextDay ? " | Next-Day Delivery" : ""}`,
+    description: `${p.short} Order ${p.name} online${p.nextDay ? " for next-day flower delivery" : ""} from ${site.name}. Free card message included.`.slice(0, 300),
     path: `/product/${p.slug}`,
     image: p.images[0],
   });
@@ -38,7 +38,7 @@ export default async function ProductPage({ params }: Props) {
   const primaryCat = product.categories.map((c) => categoryMap.get(c)).find((c) => c && c.group !== "collection") ?? categoryMap.get(product.categories[0]);
 
   const details = [
-    { icon: Truck, title: "Delivery", text: product.sameDay ? "Same-day delivery when ordered by 2 PM recipient's time (12 PM weekends). Hand-delivered by a local florist." : "Requires at least 1 day's notice. Choose your date at checkout." },
+    { icon: Truck, title: "Delivery", text: product.nextDay ? "Order by 2 PM ET (Mon–Fri) for next-day delivery. Ships overnight by FedEx or UPS, Tuesday–Saturday delivery, with tracking." : "Needs one extra day to prepare. Ships overnight with tracking; choose your Tuesday–Saturday date at checkout." },
     { icon: Gift, title: "Free card message", text: "Add a personal message at checkout—printed on a premium enclosure card." },
     { icon: Leaf, title: "Care tips", text: "Trim stems at an angle, use the flower food included and refresh the water every 2 days." },
     { icon: HeartHandshake, title: "100% satisfaction", text: "Not delighted? Contact us within 7 days for a replacement or refund." },
@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: Props) {
             {product.compareAt && product.compareAt > product.price && <span className="text-lg text-muted line-through">{usd(product.compareAt)}</span>}
           </p>
           <p className="mt-3 text-lg text-muted">{product.short}</p>
-          {product.sameDay ? (
+          {product.nextDay ? (
             <div className="mt-4">
               <CutoffCountdown variant="inline" />
             </div>
@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: Props) {
             </p>
           )}
 
-          <PurchasePanel product={{ id: product.id, slug: product.slug, name: product.name, price: product.price, images: product.images, hasSizes: product.hasSizes, sameDay: product.sameDay }} />
+          <PurchasePanel product={{ id: product.id, slug: product.slug, name: product.name, price: product.price, images: product.images, hasSizes: product.hasSizes, nextDay: product.nextDay }} />
 
           <div className="mt-8 space-y-6 border-t border-line pt-8">
             <div>
@@ -194,7 +194,7 @@ export default async function ProductPage({ params }: Props) {
               shippingRate: { "@type": "MonetaryAmount", value: "12.99", currency: "USD" },
               deliveryTime: {
                 "@type": "ShippingDeliveryTime",
-                handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: product.sameDay ? 0 : 1, unitCode: "DAY" },
+                handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: product.nextDay ? 0 : 1, unitCode: "DAY" },
                 transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 1, unitCode: "DAY" },
               },
             },

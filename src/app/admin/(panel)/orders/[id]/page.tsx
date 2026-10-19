@@ -9,7 +9,7 @@ import { db, orderItems, orders, ORDER_STATUSES, type OrderStatus } from "@/lib/
 import { requireAdmin } from "@/lib/auth";
 import { formatDate, img, usd } from "@/lib/format";
 import { orderLink, sendStatusEmail } from "@/lib/mailer";
-import { deliveryWindows } from "@/lib/site";
+import { CARRIERS, carrierLabel, trackingUrl } from "@/lib/tracking";
 import { STATUS_LABEL } from "@/components/order-view";
 import { AdminHeader, Badge, Panel } from "../../ui";
 
@@ -23,12 +23,14 @@ async function updateOrder(formData: FormData) {
   const adminNote = String(formData.get("adminNote") ?? "").slice(0, 4000);
   const markPaid = formData.get("markPaid") === "on";
   const notify = formData.get("notify") === "on";
+  const trackingCarrier = String(formData.get("trackingCarrier") ?? "") || null;
+  const trackingNumber = String(formData.get("trackingNumber") ?? "").trim().slice(0, 60) || null;
   if (!ORDER_STATUSES.includes(status)) return;
   const [before] = await db.select().from(orders).where(eq(orders.id, id)).limit(1);
   if (!before) return;
   await db
     .update(orders)
-    .set({ status, adminNote: adminNote || null, ...(markPaid && before.paymentStatus !== "paid" ? { paymentStatus: "paid", paidAt: new Date() } : {}) })
+    .set({ status, adminNote: adminNote || null, trackingCarrier, trackingNumber, ...(markPaid && before.paymentStatus !== "paid" ? { paymentStatus: "paid", paidAt: new Date() } : {}) })
     .where(eq(orders.id, id));
   if (notify && status !== before.status) after(() => sendStatusEmail(id));
   revalidatePath(`/admin/orders/${id}`);
@@ -41,7 +43,7 @@ export default async function AdminOrderPage({ params, searchParams }: { params:
   if (!order) notFound();
   const items = await db.select().from(orderItems).where(eq(orderItems.orderId, id));
   const { saved } = await searchParams;
-  const window = deliveryWindows.find((w) => w.value === order.deliveryWindow)?.label;
+  const track = trackingUrl(order.trackingCarrier, order.trackingNumber);
 
   return (
     <>
@@ -81,8 +83,8 @@ export default async function AdminOrderPage({ params, searchParams }: { params:
             </ul>
             <dl className="mt-3 space-y-1 border-t border-line pt-3 text-sm">
               <div className="flex justify-between"><dt>Subtotal</dt><dd>{usd(order.subtotal)}</dd></div>
-              <div className="flex justify-between"><dt>Delivery</dt><dd>{usd(order.deliveryFee)}</dd></div>
-              <div className="flex justify-between"><dt>Same-day</dt><dd>{usd(order.sameDayFee)}</dd></div>
+              <div className="flex justify-between"><dt>Shipping</dt><dd>{usd(order.deliveryFee)}</dd></div>
+              {order.sameDayFee > 0 && <div className="flex justify-between"><dt>Same-day (legacy)</dt><dd>{usd(order.sameDayFee)}</dd></div>}
               <div className="flex justify-between"><dt>Discount {order.couponCode && `(${order.couponCode})`}</dt><dd>−{usd(order.discount)}</dd></div>
               <div className="flex justify-between"><dt>Tax</dt><dd>{usd(order.tax)}</dd></div>
               <div className="flex justify-between text-base font-extrabold"><dt>Total</dt><dd>{usd(order.total)}</dd></div>
@@ -93,7 +95,16 @@ export default async function AdminOrderPage({ params, searchParams }: { params:
             <Panel className="p-5">
               <h2 className="mb-2 font-display text-xl font-bold text-plum-700">Deliver to</h2>
               <p className="text-lg font-extrabold">{formatDate(order.deliveryDate, { weekday: "long", month: "long", day: "numeric" })}</p>
-              <p className="mb-3 text-sm text-muted">{window}</p>
+              <p className="mb-3 text-sm text-muted">
+                Ship the business day before delivery ·{" "}
+                {track ? (
+                  <a href={track} target="_blank" rel="noopener" className="font-bold text-plum-700 underline">
+                    {carrierLabel(order.trackingCarrier)} {order.trackingNumber}
+                  </a>
+                ) : (
+                  "no tracking yet"
+                )}
+              </p>
               <address className="not-italic leading-relaxed">
                 <strong>{order.recipientName}</strong> · <a href={`tel:${order.recipientPhone}`} className="text-plum-700 underline">{order.recipientPhone}</a>
                 <br />
@@ -135,6 +146,21 @@ export default async function AdminOrderPage({ params, searchParams }: { params:
                 ))}
               </select>
             </div>
+            <div className="grid grid-cols-[110px_1fr] gap-2">
+              <div>
+                <label className="label" htmlFor="trackingCarrier">Carrier</label>
+                <select id="trackingCarrier" name="trackingCarrier" defaultValue={order.trackingCarrier ?? "fedex"} className="field">
+                  {CARRIERS.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="label" htmlFor="trackingNumber">Tracking number</label>
+                <input id="trackingNumber" name="trackingNumber" defaultValue={order.trackingNumber ?? ""} className="field" />
+              </div>
+            </div>
+            <p className="text-xs text-muted">Add the tracking number, then set status to “Shipped” — the customer gets an email with the tracking link.</p>
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" name="notify" defaultChecked className="h-5 w-5 accent-rose-600" /> Email the customer about the new status
             </label>

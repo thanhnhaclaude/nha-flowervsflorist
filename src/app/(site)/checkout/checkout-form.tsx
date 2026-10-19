@@ -6,10 +6,10 @@ import { useEffect, useMemo, useState } from "react";
 import { AlertCircle, CalendarDays, Gift, Loader2, Lock, MapPin, ShieldCheck, Tag, User, X } from "lucide-react";
 import { useCart } from "@/components/cart/cart-context";
 import { QtyStepper, FreeDeliveryMeter } from "@/components/cart/cart-drawer";
-import { addDays, earliestDate, latestDate, todayET } from "@/lib/delivery";
+import { earliestDate, isDeliveryDay, latestDate, upcomingDates } from "@/lib/delivery";
 import { formatDate, img, usd } from "@/lib/format";
 import { addOnOf, computeTotals, sizeOf, type CouponLike } from "@/lib/pricing";
-import { US_STATES, deliveryWindows } from "@/lib/site";
+import { US_STATES } from "@/lib/site";
 
 type Prefill = {
   name?: string;
@@ -40,7 +40,7 @@ function Section({ n, icon: Icon, title, children }: { n: number; icon: typeof U
 }
 
 export function CheckoutForm({ prefill, canceled, online }: { prefill: Prefill; canceled: boolean; online: boolean }) {
-  const { lines, ready, subtotal, allSameDay, setQty, remove, lineTotal } = useCart();
+  const { lines, ready, subtotal, allNextDay, setQty, remove, lineTotal } = useCart();
   const [f, setF] = useState<Record<string, string>>({
     senderName: prefill.name ?? "",
     senderEmail: prefill.email ?? "",
@@ -69,17 +69,16 @@ export function CheckoutForm({ prefill, canceled, online }: { prefill: Prefill; 
   const [coupon, setCoupon] = useState<(CouponLike & { code: string; description: string }) | null>(null);
   const [couponMsg, setCouponMsg] = useState("");
 
-  const minDate = useMemo(() => earliestDate(allSameDay), [allSameDay]);
+  const minDate = useMemo(() => earliestDate(allNextDay), [allNextDay]);
   const maxDate = useMemo(() => latestDate(), []);
-  const quickDates = useMemo(() => [0, 1, 2, 3].map((i) => addDays(minDate, i)), [minDate]);
+  const quickDates = useMemo(() => upcomingDates(allNextDay, 4), [allNextDay]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- default to the earliest valid date once the cart is known
     if (ready && (!f.deliveryDate || f.deliveryDate < minDate)) setF((x) => ({ ...x, deliveryDate: minDate }));
   }, [ready, minDate, f.deliveryDate]);
 
-  const sameDay = f.deliveryDate === todayET();
-  const totals = computeTotals(subtotal, { sameDay, coupon });
+  const totals = computeTotals(subtotal, { coupon });
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setF((x) => ({ ...x, [k]: e.target.value }));
@@ -263,50 +262,53 @@ export function CheckoutForm({ prefill, canceled, online }: { prefill: Prefill; 
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
             {quickDates.map((d) => {
               const on = f.deliveryDate === d;
-              const isToday = d === todayET();
               return (
                 <button
                   type="button"
                   key={d}
-                  onClick={() => setF((x) => ({ ...x, deliveryDate: d }))}
+                  onClick={() => (setF((x) => ({ ...x, deliveryDate: d })), setErrors((x) => ({ ...x, deliveryDate: "" })))}
                   aria-pressed={on}
                   className={`rounded-2xl border-2 p-3 text-center transition-colors ${on ? "border-plum-600 bg-plum-50" : "border-line hover:border-plum-200"}`}
                 >
-                  <span className="block text-xs font-extrabold uppercase tracking-wider text-rose-600">{isToday ? "Today" : formatDate(d, { weekday: "short" })}</span>
+                  <span className="block text-xs font-extrabold uppercase tracking-wider text-rose-600">{formatDate(d, { weekday: "long" })}</span>
                   <span className="block text-lg font-extrabold">{formatDate(d, { month: "short", day: "numeric" })}</span>
+                  {d === quickDates[0] && <span className="block text-[0.7rem] font-bold text-leaf">Earliest</span>}
                 </button>
               );
             })}
           </div>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="label" htmlFor="co-deliveryDate">
-                Or pick a date
-              </label>
-              <input id="co-deliveryDate" type="date" min={minDate} max={maxDate} value={f.deliveryDate} onChange={set("deliveryDate")} className="field" aria-invalid={Boolean(errors.deliveryDate) || undefined} aria-describedby="co-deliveryDate-help" />
-              <p id="co-deliveryDate-help" className={errors.deliveryDate ? "error-text" : "mt-1.5 text-xs text-muted"}>
-                {errors.deliveryDate || (allSameDay ? "Same-day available until 2 PM recipient's time (12 PM weekends)." : "One or more items need at least 1 day's notice.")}
-              </p>
-            </div>
-            <div>
-              <label className="label" htmlFor="co-deliveryWindow">
-                Time window
-              </label>
-              <select id="co-deliveryWindow" className="field" value={f.deliveryWindow} onChange={set("deliveryWindow")}>
-                {deliveryWindows.map((w) => (
-                  <option key={w.value} value={w.value}>
-                    {w.label}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-1.5 text-xs text-muted">We do our best to honor time windows; they aren&apos;t guaranteed.</p>
-            </div>
+          <div className="mt-4">
+            <label className="label" htmlFor="co-deliveryDate">
+              Or pick another date
+            </label>
+            <input
+              id="co-deliveryDate"
+              type="date"
+              min={minDate}
+              max={maxDate}
+              value={f.deliveryDate}
+              onChange={(e) => {
+                const v = e.target.value;
+                setF((x) => ({ ...x, deliveryDate: v }));
+                setErrors((x) => ({ ...x, deliveryDate: v && !isDeliveryDay(v) ? "We deliver Tuesday through Saturday. Please choose another day." : "" }));
+              }}
+              className="field sm:max-w-xs"
+              aria-invalid={Boolean(errors.deliveryDate) || undefined}
+              aria-describedby="co-deliveryDate-help"
+            />
+            <p id="co-deliveryDate-help" className={errors.deliveryDate ? "error-text" : "mt-1.5 text-xs text-muted"}>
+              {errors.deliveryDate ||
+                (allNextDay
+                  ? "Shipped overnight by FedEx or UPS and delivered by end of day, Tuesday–Saturday. Order by 2 PM ET (Mon–Fri) for next-day delivery."
+                  : "One or more items need an extra day to prepare. Deliveries arrive Tuesday–Saturday by end of day.")}
+            </p>
           </div>
           <div className="mt-4">
             <label className="label" htmlFor="co-instructions">
               Delivery instructions <span className="font-normal text-muted">(optional)</span>
             </label>
-            <textarea id="co-instructions" rows={2} maxLength={500} value={f.instructions} onChange={set("instructions")} className="field" placeholder="Gate code, leave with front desk, service time for funerals…" />
+            <textarea id="co-instructions" rows={2} maxLength={500} value={f.instructions} onChange={set("instructions")} className="field" placeholder="Leave at front desk, side door, building access code…" />
+            <p className="mt-1.5 text-xs text-muted">The carrier may leave the box at the door if no one is home. For businesses, make sure someone will be there during business hours.</p>
           </div>
         </Section>
 
@@ -392,15 +394,9 @@ export function CheckoutForm({ prefill, canceled, online }: { prefill: Prefill; 
               <dd className="font-bold">{usd(totals.subtotal)}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-muted">Delivery</dt>
+              <dt className="text-muted">Overnight shipping</dt>
               <dd className="font-bold">{totals.deliveryFee ? usd(totals.deliveryFee) : <span className="text-leaf">FREE</span>}</dd>
             </div>
-            {totals.sameDayFee > 0 && (
-              <div className="flex justify-between">
-                <dt className="text-muted">Same-day priority</dt>
-                <dd className="font-bold">{usd(totals.sameDayFee)}</dd>
-              </div>
-            )}
             {totals.discount > 0 && (
               <div className="flex justify-between text-leaf">
                 <dt>Discount</dt>

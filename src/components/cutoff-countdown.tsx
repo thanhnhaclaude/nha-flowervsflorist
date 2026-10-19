@@ -3,8 +3,12 @@
 import { useEffect, useState } from "react";
 import { Clock } from "lucide-react";
 import { cutoffCountdown } from "@/lib/delivery";
+import { formatDate } from "@/lib/format";
 
-/** "Order within 3h 12m for same-day delivery" — computed on the client so cached pages stay accurate. */
+/**
+ * "Order within 2h 15m for delivery Wednesday, Oct 21" — computed on the client so cached pages stay
+ * accurate. Before the 2 PM ET ship cut-off it counts down; afterwards it shows the next arrival date.
+ */
 export function CutoffCountdown({ variant = "pill" }: { variant?: "pill" | "inline" }) {
   const [state, setState] = useState<ReturnType<typeof cutoffCountdown> | undefined>(undefined);
 
@@ -17,18 +21,19 @@ export function CutoffCountdown({ variant = "pill" }: { variant?: "pill" | "inli
 
   if (state === undefined) return <span className={variant === "pill" ? "inline-block h-9" : ""} aria-hidden="true" />;
 
-  const text = state ? (
+  const arrives = formatDate(state.arrives, { weekday: "long", month: "short", day: "numeric" });
+  const text = state.open ? (
     <>
       Order within{" "}
       <strong className="tabular-nums">
         {state.hours > 0 ? `${state.hours}h ` : ""}
         {state.minutes}m
       </strong>{" "}
-      for <strong>same-day delivery</strong>
+      for delivery <strong>{arrives}</strong>
     </>
   ) : (
     <>
-      Order now for <strong>next-day delivery</strong>
+      Order now for delivery <strong>{arrives}</strong>
     </>
   );
 

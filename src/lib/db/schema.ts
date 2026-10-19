@@ -34,7 +34,8 @@ export const products = mysqlTable(
     categories: json("categories").$type<string[]>().notNull(),
     colors: json("colors").$type<string[]>().notNull(),
     images: json("images").$type<string[]>().notNull(),
-    sameDay: boolean("same_day").notNull().default(true),
+    /** Next-day eligible (column keeps its original name "same_day"). False = needs one extra prep day. */
+    nextDay: boolean("same_day").notNull().default(true),
     bestSeller: boolean("best_seller").notNull().default(false),
     featured: boolean("featured").notNull().default(false),
     hasSizes: boolean("has_sizes").notNull().default(true),
@@ -142,6 +143,8 @@ export const orders = mysqlTable(
     tax: int("tax").notNull().default(0),
     total: int("total").notNull(),
     couponCode: varchar("coupon_code", { length: 40 }),
+    trackingCarrier: varchar("tracking_carrier", { length: 20 }),
+    trackingNumber: varchar("tracking_number", { length: 60 }),
     stripeSessionId: varchar("stripe_session_id", { length: 255 }),
     stripePaymentIntent: varchar("stripe_payment_intent", { length: 255 }),
     adminNote: text("admin_note"),

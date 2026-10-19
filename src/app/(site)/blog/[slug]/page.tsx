@@ -62,9 +62,9 @@ export default async function PostPage({ params }: Props) {
             </nav>
           )}
           <div className="rounded-2xl bg-plum-700 p-5 text-white">
-            <p className="font-display text-xl font-bold">Send flowers today</p>
-            <p className="mt-1 text-sm text-plum-100">Same-day delivery when you order by 2 PM.</p>
-            <Link href="/same-day-flower-delivery" className="btn btn-primary btn-sm mt-4 w-full">
+            <p className="font-display text-xl font-bold">Send flowers tomorrow</p>
+            <p className="mt-1 text-sm text-plum-100">Next-day delivery when you order by 2 PM ET.</p>
+            <Link href="/next-day-flower-delivery" className="btn btn-primary btn-sm mt-4 w-full">
               Shop now
             </Link>
           </div>

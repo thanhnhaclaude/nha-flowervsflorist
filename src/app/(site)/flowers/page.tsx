@@ -15,9 +15,9 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const sp = await searchParams;
   return pageMeta({
     title: "Shop All Flowers Online | Fresh Bouquets & Arrangements",
-    description: "Shop all fresh flowers online: roses, sunflowers, tulips, lilies, orchids, plants and gifts. Same-day flower delivery across the USA.",
+    description: "Shop all fresh flowers online: roses, sunflowers, tulips, lilies, orchids, plants and gifts. Next-day flower delivery across the USA.",
     path: "/flowers",
-    noindex: Boolean(sp.color || sp.price || sp.sort || sp.sameday),
+    noindex: Boolean(sp.color || sp.price || sp.sort || sp.nextday),
   });
 }
 
@@ -29,7 +29,7 @@ export default async function AllFlowersPage({ searchParams }: Props) {
         <div className="container-x py-10 md:py-12">
           <Breadcrumbs items={[{ name: "All Flowers", path: "/flowers" }]} />
           <h1 className="mt-4 text-4xl font-bold text-plum-700 md:text-5xl">Shop All Flowers</h1>
-          <p className="mt-3 max-w-2xl text-lg text-muted">Every bouquet, plant and gift in our shop—hand-arranged by expert florists and ready to deliver.</p>
+          <p className="mt-3 max-w-2xl text-lg text-muted">Every bouquet, plant and gift in our shop—carefully packed and ready to ship overnight.</p>
           <div className="mt-5">
             <CutoffCountdown />
           </div>

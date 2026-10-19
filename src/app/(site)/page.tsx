@@ -14,18 +14,18 @@ import { site } from "@/lib/site";
 export const dynamic = "force-dynamic";
 
 export const metadata = pageMeta({
-  title: "Flower Delivery | Send Flowers Online Same Day | FlowerVsFlorist",
+  title: "Flower Delivery | Send Flowers Online, Delivered Tomorrow | FlowerVsFlorist",
   description:
-    "Send flowers online with same-day flower delivery nationwide. Fresh roses, birthday bouquets, sympathy flowers & plants hand-arranged by expert florists. Order by 2 PM!",
+    "Send flowers online with next-day flower delivery nationwide. Fresh roses, birthday bouquets, sympathy flowers & plants, carefully packed and shipped overnight. Order by 2 PM ET!",
   path: "/",
 });
 
 const occasionTiles = ["birthday-flowers", "anniversary-flowers", "sympathy-flowers", "love-and-romance-flowers", "get-well-flowers", "thank-you-flowers", "congratulations-flowers", "new-baby-flowers"];
 
 const homeFaqs = [
-  { q: "How do I send flowers online for same-day delivery?", a: "Choose any bouquet marked Same-Day, select today's date at checkout and place your order before 2 PM in the recipient's time zone (12 PM on weekends). A local florist hand-arranges and delivers it today." },
-  { q: "How much does flower delivery cost?", a: "Standard delivery is $12.99 and is free on orders of $79 or more. Same-day priority adds $5. You'll see the exact total before you pay." },
-  { q: "Where do you deliver flowers?", a: "We deliver to homes, businesses, hospitals and funeral homes in all 50 states and Washington, D.C." },
+  { q: "Can I send flowers online for delivery tomorrow?", a: "Yes. Choose any bouquet marked Next-Day and order by 2 PM Eastern Time, Monday–Friday. It ships overnight by FedEx or UPS and arrives the next day, Tuesday–Saturday." },
+  { q: "How much does flower delivery cost?", a: "Overnight shipping is $12.99 per order and free on orders of $79 or more. There are no hidden service fees—you'll see the exact total before you pay." },
+  { q: "Where do you deliver flowers?", a: "We ship to homes and businesses throughout the continental United States. We can't deliver to P.O. boxes or APO/FPO addresses." },
   { q: "What if my flowers aren't perfect?", a: "Every order is backed by our 100% Satisfaction Guarantee. Contact us within 7 days and we'll send a replacement or issue a refund." },
 ];
 
@@ -44,16 +44,16 @@ export default async function HomePage() {
           <div className="max-w-xl text-white">
             <CutoffCountdown />
             <h1 className="mt-5 text-[2.6rem] font-bold leading-[1.05] md:text-6xl">
-              Flower Delivery,
+              Fresh Flowers,
               <br />
-              <span className="italic text-gold">Hand-Arranged</span> Today
+              <span className="italic text-gold">Delivered</span> Tomorrow
             </h1>
             <p className="mt-5 max-w-lg text-lg text-white/90 md:text-xl">
-              Send fresh flowers online for every moment. Gorgeous bouquets by expert florists, delivered same day across the USA.
+              Send flowers online for every moment. Gorgeous bouquets, carefully packed and shipped overnight anywhere in the USA.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/same-day-flower-delivery" className="btn btn-primary text-lg">
-                <Truck className="h-5 w-5" /> Shop Same-Day Flowers
+              <Link href="/next-day-flower-delivery" className="btn btn-primary text-lg">
+                <Truck className="h-5 w-5" /> Shop Next-Day Flowers
               </Link>
               <Link href="/best-sellers" className="btn btn-white text-lg">
                 Best Sellers
@@ -102,7 +102,7 @@ export default async function HomePage() {
       {/* Best sellers */}
       <section className="bg-blush py-16 md:py-20">
         <div className="container-x">
-          <SectionHeading eyebrow="Customer favorites" title="Best-Selling Flowers" text="Florist-favorite bouquets—every one available for same-day delivery." action={{ label: "Shop all best sellers", href: "/best-sellers" }} />
+          <SectionHeading eyebrow="Customer favorites" title="Best-Selling Flowers" text="Our most-loved bouquets—every one available for next-day delivery." action={{ label: "Shop all best sellers", href: "/best-sellers" }} />
           <ProductGrid products={bestSellers.map(toCard)} />
         </div>
       </section>
@@ -115,7 +115,7 @@ export default async function HomePage() {
           <span className="relative mt-auto p-7 text-white md:p-9">
             <span className="eyebrow !text-gold">Sympathy & Funeral</span>
             <span className="mt-2 block font-display text-3xl font-bold md:text-4xl">Comfort When It Matters Most</span>
-            <span className="mt-2 block max-w-sm text-white/85">Peaceful arrangements delivered with care to homes and funeral services today.</span>
+            <span className="mt-2 block max-w-sm text-white/85">Peaceful bouquets and plants sent with care to the family home.</span>
             <span className="mt-5 inline-flex items-center gap-2 font-extrabold">
               Shop sympathy flowers <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </span>
@@ -154,19 +154,19 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Same-day explainer */}
+      {/* Next-day explainer */}
       <section className="container-x grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
         <div className="relative aspect-[7/5] overflow-hidden rounded-[1.75rem]">
-          <Image src={img("brand/florist-arranging")} alt="Florist hand-arranging a fresh bouquet" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+          <Image src={img("brand/florist-arranging")} alt="Fresh flowers being arranged into a bouquet" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
         </div>
         <div>
-          <p className="eyebrow">Same-day flower delivery</p>
-          <h2 className="mt-2 text-3xl font-bold text-plum-700 md:text-[2.5rem] md:leading-[1.1]">Fresh Flowers, Delivered Today in 3 Easy Steps</h2>
+          <p className="eyebrow">Next-day flower delivery</p>
+          <h2 className="mt-2 text-3xl font-bold text-plum-700 md:text-[2.5rem] md:leading-[1.1]">Fresh Flowers, Delivered Tomorrow in 3 Easy Steps</h2>
           <ol className="mt-8 space-y-6">
             {[
-              { icon: Flower2, title: "Choose a bouquet", text: "Pick any design marked Same-Day—roses, birthday bouquets, sympathy flowers and more." },
-              { icon: CalendarDays, title: "Select today's date", text: "Order by 2 PM in the recipient's time zone (12 PM on weekends) and add a free card message." },
-              { icon: Truck, title: "We hand-deliver it", text: "A local florist arranges your flowers fresh and delivers them in person—typically between noon and 8 PM." },
+              { icon: Flower2, title: "Choose a bouquet", text: "Pick any design marked Next-Day—roses, birthday bouquets, sympathy flowers and more." },
+              { icon: CalendarDays, title: "Pick a delivery date", text: "Order by 2 PM ET (Mon–Fri) for tomorrow, or schedule any Tuesday–Saturday up to 90 days ahead. Add a free card message." },
+              { icon: Truck, title: "We ship it overnight", text: "Your bouquet is packed in a protective box with water and shipped by FedEx or UPS. You get a tracking link by email." },
             ].map((s, i) => (
               <li key={s.title} className="flex gap-4">
                 <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-petal text-rose-600">
@@ -180,8 +180,8 @@ export default async function HomePage() {
               </li>
             ))}
           </ol>
-          <Link href="/same-day-flower-delivery" className="btn btn-primary mt-8">
-            Send Flowers Today
+          <Link href="/next-day-flower-delivery" className="btn btn-primary mt-8">
+            Send Flowers for Tomorrow
           </Link>
         </div>
       </section>
@@ -240,15 +240,15 @@ export default async function HomePage() {
       {/* SEO copy + FAQ */}
       <section className="container-x grid gap-12 py-16 md:py-20 lg:grid-cols-2">
         <div className="prose-fvf">
-          <h2 className="!mt-0">Send Flowers Online with Same-Day Flower Delivery</h2>
+          <h2 className="!mt-0">Send Flowers Online with Next-Day Flower Delivery</h2>
           <p>
-            {site.name} makes it easy to send flowers online for any occasion. Whether you need <Link href="/birthday-flowers">birthday flowers</Link> delivered this afternoon, a romantic{" "}
-            <Link href="/roses">dozen roses</Link> for your anniversary, or thoughtful <Link href="/sympathy-flowers">sympathy flowers</Link> for a grieving family, our florists hand-arrange every
-            bouquet with fresh, premium blooms.
+            {site.name} makes it easy to send flowers online for any occasion. Whether you need <Link href="/birthday-flowers">birthday flowers</Link> delivered tomorrow, a romantic{" "}
+            <Link href="/roses">dozen roses</Link> for your anniversary, or thoughtful <Link href="/sympathy-flowers">sympathy flowers</Link> for a grieving family, every
+            bouquet is made with fresh, premium blooms and packed with care.
           </p>
           <p>
-            Our <Link href="/same-day-flower-delivery">same-day flower delivery</Link> service reaches homes, offices, hospitals and funeral homes across all 50 states. Order before 2 PM in your
-            recipient&apos;s time zone and your flowers arrive today. Planning ahead? Schedule delivery up to 90 days in advance.
+            Our <Link href="/next-day-flower-delivery">next-day flower delivery</Link> ships overnight to homes and offices across the continental U.S. Order by 2 PM Eastern Time, Monday–Friday,
+            and your flowers arrive the next day. Planning ahead? Schedule delivery up to 90 days in advance.
           </p>
           <h3>Affordable flowers, never ordinary</h3>
           <p>

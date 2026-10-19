@@ -129,7 +129,7 @@ export function ProductForm({ product, categories }: { product?: Product; catego
         <div className="space-y-3 rounded-2xl bg-white p-5 shadow-card">
           {[
             ["active", "Visible in store", product?.active ?? true],
-            ["sameDay", "Same-day delivery eligible", product?.sameDay ?? true],
+            ["nextDay", "Next-day eligible (unchecked = needs 1 extra prep day)", product?.nextDay ?? true],
             ["hasSizes", "Offer Standard / Deluxe / Premium sizes", product?.hasSizes ?? true],
             ["bestSeller", "Best seller", product?.bestSeller ?? false],
             ["featured", "Featured on home page", product?.featured ?? false],

@@ -53,7 +53,7 @@ export function sortProducts<T extends Product>(list: T[], sort: SortKey) {
 export async function getCategoryProducts(slug: string) {
   const all = await getProducts();
   if (slug === "best-sellers") return all.filter((p) => p.bestSeller || p.categories.includes(slug));
-  if (slug === "same-day-flower-delivery") return all.filter((p) => p.sameDay);
+  if (slug === "next-day-flower-delivery") return all.filter((p) => p.nextDay);
   if (slug === "flowers-under-50") return all.filter((p) => p.price < 5000);
   return all.filter((p) => p.categories.includes(slug));
 }

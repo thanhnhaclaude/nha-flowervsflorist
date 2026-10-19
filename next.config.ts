@@ -27,7 +27,10 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/shop", destination: "/flowers", permanent: true },
-      { source: "/same-day", destination: "/same-day-flower-delivery", permanent: true },
+      { source: "/same-day", destination: "/next-day-flower-delivery", permanent: true },
+      { source: "/next-day", destination: "/next-day-flower-delivery", permanent: true },
+      { source: "/same-day-flower-delivery", destination: "/next-day-flower-delivery", permanent: true },
+      { source: "/blog/same-day-flower-delivery-guide", destination: "/blog/next-day-flower-delivery-guide", permanent: true },
       { source: "/sympathy", destination: "/sympathy-flowers", permanent: true },
       { source: "/birthday", destination: "/birthday-flowers", permanent: true },
       { source: "/funeral-flowers", destination: "/sympathy-flowers", permanent: true },

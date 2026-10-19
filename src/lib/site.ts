@@ -3,9 +3,9 @@ export const site = {
   name: "FlowerVsFlorist",
   domain: "flowervsflorist.com",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://flowervsflorist.com").replace(/\/+$/, ""),
-  tagline: "Fresh flowers, florist-crafted, delivered today",
+  tagline: "Farm-fresh flowers, delivered tomorrow",
   description:
-    "Send fresh flowers online with same-day flower delivery across the USA. Hand-arranged roses, birthday bouquets, sympathy flowers and plants from FlowerVsFlorist.",
+    "Send fresh flowers online with next-day flower delivery anywhere in the USA. Roses, birthday bouquets, sympathy flowers and plants, carefully packed and shipped overnight.",
   phone: "+14782198398",
   phoneDisplay: "(478) 219-8398",
   email: "contact@flowervsflorist.com",
@@ -50,20 +50,23 @@ export const addressLine = `${site.company.street}, ${site.company.city}, ${site
 /** Delivery & pricing rules (all money in cents). */
 export const commerce = {
   currency: "usd",
+  /** Overnight shipping (FedEx/UPS) per order. */
   deliveryFee: 1299,
-  sameDayFee: 500,
   freeDeliveryThreshold: 7900,
-  /** Same-day orders must be placed before this hour (Eastern Time). */
-  sameDayCutoffHour: 14,
+  /** Orders placed Mon–Fri before this hour (Eastern Time) ship the same day for next-day delivery. */
+  cutoffHour: 14,
+  /** Days the carrier delivers flowers. */
+  deliveryDays: ["Tue", "Wed", "Thu", "Fri", "Sat"],
   maxDaysAhead: 90,
   timeZone: "America/New_York",
 } as const;
 
+/** Carrier delivery: no time windows. Kept as a list so past orders still display a label. */
 export const deliveryWindows = [
-  { value: "anytime", label: "Anytime (8 AM – 8 PM)" },
-  { value: "morning", label: "Morning (8 AM – 12 PM)" },
-  { value: "afternoon", label: "Afternoon (12 PM – 5 PM)" },
-  { value: "evening", label: "Evening (5 PM – 8 PM)" },
+  { value: "anytime", label: "By end of day (carrier delivery)" },
+  { value: "morning", label: "Morning" },
+  { value: "afternoon", label: "Afternoon" },
+  { value: "evening", label: "Evening" },
 ] as const;
 
 export const addOns = [

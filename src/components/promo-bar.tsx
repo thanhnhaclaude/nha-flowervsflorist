@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const messages = [
-  { text: "Same-day flower delivery — order by 2 PM recipient's time", href: "/same-day-flower-delivery" },
+  { text: "Next-day flower delivery — order by 2 PM ET, Mon–Fri", href: "/next-day-flower-delivery" },
   { text: "Free delivery on orders $79+", href: "/best-sellers" },
   { text: "Join our newsletter & get 10% off your first order", href: "#newsletter" },
   { text: "100% satisfaction guarantee on every bouquet", href: "/refund-policy" },

@@ -29,14 +29,14 @@ const COLOR_SWATCH: Record<string, string> = {
   green: "#16a34a",
 };
 
-export type ListingParams = { color?: string; price?: string; sort?: string; sameday?: string };
+export type ListingParams = { color?: string; price?: string; sort?: string; nextday?: string };
 
 export function applyFilters(list: ProductWithRating[], params: ListingParams) {
   let out = list;
   if (params.color) out = out.filter((p) => p.colors.includes(params.color!));
   const range = PRICE_RANGES.find((r) => r.key === params.price);
   if (range) out = out.filter((p) => p.price >= range.min && p.price <= range.max);
-  if (params.sameday === "1") out = out.filter((p) => p.sameDay);
+  if (params.nextday === "1") out = out.filter((p) => p.nextDay);
   const sort = (SORTS.find((s) => s.key === params.sort)?.key ?? "featured") as SortKey;
   return sortProducts(out, sort);
 }
@@ -50,7 +50,7 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
     const qs = new URLSearchParams(Object.entries(next).filter(([, v]) => v) as [string, string][]).toString();
     return qs ? `${basePath}?${qs}` : basePath;
   };
-  const active = Boolean(params.color || params.price || params.sameday);
+  const active = Boolean(params.color || params.price || params.nextday);
   const chip = (on: boolean) =>
     `inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-sm font-bold transition-colors ${on ? "border-plum-600 bg-plum-600 text-white" : "border-line bg-white text-ink hover:border-plum-200 hover:bg-blush"}`;
 
@@ -61,8 +61,8 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
           <span className="mr-1 flex items-center gap-2 text-sm font-extrabold text-plum-700">
             <SlidersHorizontal className="h-4 w-4" /> Filter
           </span>
-          <Link href={href({ sameday: params.sameday === "1" ? undefined : "1" })} className={chip(params.sameday === "1")} scroll={false}>
-            Same-day delivery
+          <Link href={href({ nextday: params.nextday === "1" ? undefined : "1" })} className={chip(params.nextday === "1")} scroll={false}>
+            Next-day delivery
           </Link>
           {PRICE_RANGES.map((r) => (
             <Link key={r.key} href={href({ price: params.price === r.key ? undefined : r.key })} className={chip(params.price === r.key)} scroll={false}>

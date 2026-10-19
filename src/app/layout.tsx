@@ -9,7 +9,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], style: 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Flower Delivery | Send Flowers Online Same Day | FlowerVsFlorist",
+    default: "Flower Delivery | Send Flowers Online, Delivered Tomorrow | FlowerVsFlorist",
     template: `%s | ${site.name}`,
   },
   description: site.description,

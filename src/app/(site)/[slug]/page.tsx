@@ -21,7 +21,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const c = categoryMap.get(slug);
   if (!c) return {};
   const sp = await searchParams;
-  const filtered = Boolean(sp.color || sp.price || sp.sort || sp.sameday);
+  const filtered = Boolean(sp.color || sp.price || sp.sort || sp.nextday);
   return pageMeta({ title: c.seoTitle, description: c.seoDescription, path: `/${slug}`, image: c.image, noindex: filtered });
 }
 
@@ -68,7 +68,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
               </div>
             ))}
             <p>
-              Need help choosing? Call our florists at <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> or explore our <Link href="/same-day-flower-delivery">same-day flower delivery</Link>{" "}
+              Need help choosing? Call us at <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> or explore our <Link href="/next-day-flower-delivery">next-day flower delivery</Link>{" "}
               collection.
             </p>
           </div>

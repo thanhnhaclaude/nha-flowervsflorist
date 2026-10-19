@@ -28,7 +28,7 @@ export async function setupDatabase(db: Db, log: (msg: string) => void = console
         categories: p.categories,
         colors: p.colors,
         images: p.images,
-        sameDay: p.sameDay ?? true,
+        nextDay: p.nextDay ?? true,
         bestSeller: p.bestSeller ?? false,
         featured: p.featured ?? false,
         hasSizes: p.sizes ?? true,

@@ -18,7 +18,7 @@ export default async function BlogPage() {
   const [lead, ...rest] = posts;
   return (
     <>
-      <PageHero eyebrow="The flower journal" title="Flower Tips, Meanings & Inspiration" text="Expert advice from our florists to help you choose, send and care for flowers." />
+      <PageHero eyebrow="The flower journal" title="Flower Tips, Meanings & Inspiration" text="Practical advice to help you choose, send and care for flowers." />
       <div className="container-x pb-20">
         {lead && (
           <Link href={`/blog/${lead.slug}`} className="group card mb-10 grid overflow-hidden md:grid-cols-2">

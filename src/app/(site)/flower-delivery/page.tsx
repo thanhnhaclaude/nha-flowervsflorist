@@ -5,15 +5,15 @@ import { states } from "@/data/states";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
-  title: "Flower Delivery by State – Same-Day Flowers Across the USA",
-  description: "Same-day flower delivery in all 50 states and Washington, D.C. Choose a state to send fresh, florist-arranged flowers today.",
+  title: "Flower Delivery by State – Next-Day Flowers Across the USA",
+  description: "Next-day flower delivery across the continental U.S. Choose a state to send fresh flowers, shipped overnight with tracking.",
   path: "/flower-delivery",
 });
 
 export default function FlowerDeliveryIndex() {
   return (
     <>
-      <PageHero eyebrow="Nationwide delivery" title="Flower Delivery Across the USA" text="Hand-arranged by local florists and delivered same day in all 50 states. Choose a state to get started." />
+      <PageHero eyebrow="Nationwide delivery" title="Flower Delivery Across the USA" text="Carefully packed and shipped overnight for next-day delivery. Choose a state to get started." />
       <div className="container-x pb-20">
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {states.map((s) => (

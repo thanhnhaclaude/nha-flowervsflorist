@@ -4,8 +4,8 @@ import { eq, sql } from "drizzle-orm";
 import { coupons, db, orderItems, orders } from "@/lib/db";
 import { getCustomerSession } from "@/lib/auth";
 import { findCoupon } from "@/lib/coupons";
-import { earliestDate, isValidDeliveryDate, todayET } from "@/lib/delivery";
-import { img } from "@/lib/format";
+import { earliestDate, isValidDeliveryDate } from "@/lib/delivery";
+import { formatDate, img } from "@/lib/format";
 import { sendOrderEmails } from "@/lib/mailer";
 import { paymentsEnabled, stripe } from "@/lib/payments";
 import { addOnOf, computeTotals, isSizeKey, sizeOf, unitPrice } from "@/lib/pricing";
@@ -49,10 +49,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "Some items in your cart are no longer available. Please review your cart.", errors: { items: "unavailable" } }, { status: 409 });
   }
 
-  const allSameDay = lines.every((l) => l.p.sameDay);
-  if (!isValidDeliveryDate(input.deliveryDate, allSameDay)) {
+  const allNextDay = lines.every((l) => l.p.nextDay);
+  if (!isValidDeliveryDate(input.deliveryDate, allNextDay)) {
     return NextResponse.json(
-      { message: "Please choose another delivery date.", errors: { deliveryDate: `The earliest available date for this order is ${earliestDate(allSameDay)}.` } },
+      { message: "Please choose another delivery date.", errors: { deliveryDate: `Choose a Tuesday–Saturday delivery date on or after ${formatDate(earliestDate(allNextDay), { weekday: "long", month: "long", day: "numeric" })}.` } },
       { status: 422 },
     );
   }
@@ -64,8 +64,7 @@ export async function POST(req: Request) {
     if (!res.ok) return NextResponse.json({ message: res.message, errors: { couponCode: res.message } }, { status: 422 });
     coupon = res.coupon;
   }
-  const sameDay = input.deliveryDate === todayET();
-  const totals = computeTotals(subtotal, { sameDay, coupon });
+  const totals = computeTotals(subtotal, { coupon });
   const session = await getCustomerSession();
   const online = paymentsEnabled();
 
@@ -144,8 +143,7 @@ export async function POST(req: Request) {
             },
           },
         })),
-        ...(totals.deliveryFee ? [fee("Flower delivery", totals.deliveryFee)] : []),
-        ...(totals.sameDayFee ? [fee("Same-day priority delivery", totals.sameDayFee)] : []),
+        ...(totals.deliveryFee ? [fee("Overnight shipping", totals.deliveryFee)] : []),
       ],
       discounts,
       automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === "true" },

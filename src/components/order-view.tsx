@@ -2,20 +2,21 @@ import Image from "next/image";
 import { Check, CircleCheck, Clock, Package, Truck } from "lucide-react";
 import type { Order, OrderItem } from "@/lib/db";
 import { formatDate, img, usd } from "@/lib/format";
-import { deliveryWindows, site } from "@/lib/site";
+import { site } from "@/lib/site";
+import { carrierLabel, trackingUrl } from "@/lib/tracking";
 
 const STEPS = [
   { key: "received", label: "Order received", icon: Check },
-  { key: "processing", label: "Being arranged", icon: Package },
-  { key: "out_for_delivery", label: "Out for delivery", icon: Truck },
+  { key: "processing", label: "Being prepared", icon: Package },
+  { key: "out_for_delivery", label: "Shipped", icon: Truck },
   { key: "delivered", label: "Delivered", icon: CircleCheck },
 ];
 
 export const STATUS_LABEL: Record<string, string> = {
   pending_payment: "Awaiting payment",
   received: "Order received",
-  processing: "Being arranged",
-  out_for_delivery: "Out for delivery",
+  processing: "Being prepared",
+  out_for_delivery: "Shipped",
   delivered: "Delivered",
   cancelled: "Cancelled",
   refunded: "Refunded",
@@ -23,7 +24,7 @@ export const STATUS_LABEL: Record<string, string> = {
 
 export function OrderView({ order, items }: { order: Order; items: OrderItem[] }) {
   const stepIndex = STEPS.findIndex((s) => s.key === order.status);
-  const window = deliveryWindows.find((w) => w.value === order.deliveryWindow)?.label;
+  const track = trackingUrl(order.trackingCarrier, order.trackingNumber);
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
       <div className="space-y-6">
@@ -74,7 +75,12 @@ export function OrderView({ order, items }: { order: Order; items: OrderItem[] }
         <section className="card p-5 md:p-6">
           <h2 className="font-display text-xl font-bold text-plum-700">Delivery</h2>
           <p className="mt-2 font-bold">{formatDate(order.deliveryDate, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}</p>
-          <p className="text-sm text-muted">{window}</p>
+          <p className="text-sm text-muted">Delivered by end of day via overnight shipping</p>
+          {track && (
+            <a href={track} target="_blank" rel="noopener" className="btn btn-plum btn-sm mt-3">
+              Track with {carrierLabel(order.trackingCarrier)} · {order.trackingNumber}
+            </a>
+          )}
           <address className="mt-3 not-italic leading-relaxed">
             {order.recipientName}
             {order.company && (
@@ -100,7 +106,7 @@ export function OrderView({ order, items }: { order: Order; items: OrderItem[] }
         <section className="card p-5 md:p-6">
           <dl className="space-y-2 text-[0.95rem]">
             <div className="flex justify-between"><dt className="text-muted">Subtotal</dt><dd>{usd(order.subtotal)}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted">Delivery</dt><dd>{order.deliveryFee ? usd(order.deliveryFee) : "FREE"}</dd></div>
+            <div className="flex justify-between"><dt className="text-muted">Shipping</dt><dd>{order.deliveryFee ? usd(order.deliveryFee) : "FREE"}</dd></div>
             {order.sameDayFee > 0 && <div className="flex justify-between"><dt className="text-muted">Same-day priority</dt><dd>{usd(order.sameDayFee)}</dd></div>}
             {order.discount > 0 && <div className="flex justify-between text-leaf"><dt>Discount {order.couponCode && `(${order.couponCode})`}</dt><dd>−{usd(order.discount)}</dd></div>}
             {order.tax > 0 && <div className="flex justify-between"><dt className="text-muted">Tax</dt><dd>{usd(order.tax)}</dd></div>}

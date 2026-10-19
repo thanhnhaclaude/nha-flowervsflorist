@@ -14,9 +14,9 @@ export const metadata = pageMeta({
 });
 
 const values = [
-  { icon: Sparkles, title: "Florist-crafted", text: "Every design is arranged by hand by skilled florists—never mass-assembled in a warehouse." },
-  { icon: Leaf, title: "Fresh first", text: "We choose in-season, premium stems and ship them cool so they last longer at home." },
-  { icon: Truck, title: "Fast & reliable", text: "Same-day delivery across the country when you order by 2 PM recipient's time." },
+  { icon: Sparkles, title: "Beautifully designed", text: "A curated collection of bouquets, plants and gifts for every occasion and budget." },
+  { icon: Leaf, title: "Fresh first", text: "Premium stems, packed with a water source and shipped overnight so they last longer at home." },
+  { icon: Truck, title: "Fast & reliable", text: "Next-day delivery across the U.S. when you order by 2 PM Eastern, Monday–Friday." },
   { icon: HeartHandshake, title: "Real people", text: "Our Macon, Georgia team answers the phone and email and personally resolves any problem." },
 ];
 
@@ -28,14 +28,14 @@ export default function AboutPage() {
           <div>
             <Breadcrumbs items={[{ name: "About Us", path: "/about" }]} />
             <p className="eyebrow mt-6">Our story</p>
-            <h1 className="mt-2 text-4xl font-bold leading-tight text-plum-700 md:text-5xl">Why choose a florist over just “flowers”?</h1>
+            <h1 className="mt-2 text-4xl font-bold leading-tight text-plum-700 md:text-5xl">Flower vs. florist? Get the best of both.</h1>
             <p className="mt-5 text-lg leading-relaxed text-muted">
-              Our name says it all. Anyone can sell flowers—but a <em>florist</em> brings artistry, care and know-how to every stem. {site.name} was created to give you the
-              convenience of ordering online with the personal touch of a real florist, delivered to your door the very same day.
+              Our name says it all. You shouldn&apos;t have to choose between beautiful flowers and a simple, honest way to send them. {site.name} brings you thoughtfully
+              designed bouquets, clear prices and overnight delivery to any door in the continental U.S.—with real people standing behind every order.
             </p>
           </div>
           <div className="relative aspect-[7/5] overflow-hidden rounded-[1.75rem] shadow-lift">
-            <Image src={img("brand/florist-studio")} alt="A florist arranging flowers in the studio" fill fetchPriority="high" loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            <Image src={img("brand/florist-studio")} alt="Fresh flowers being arranged in a studio" fill fetchPriority="high" loading="eager" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -74,8 +74,8 @@ export default function AboutPage() {
               behind every order.
             </p>
             <p>
-              When you place an order, we send it to a professional florist near your recipient, who hand-arranges your design with fresh flowers and delivers it in person. That&apos;s how we
-              can deliver beautiful flowers the same day—without boxes of stems shipped across the country.
+              Every order is packed in a protective box with a water source and shipped overnight by FedEx or UPS, so it arrives fresh the next day. Many stems travel in bud and open
+              beautifully at home—and you get a tracking link the moment your gift ships.
             </p>
             <p>
               Questions or special requests? Call us at <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.
