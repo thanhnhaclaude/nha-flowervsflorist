@@ -5,6 +5,7 @@ import { db, orderItems, orders, type Order, type OrderItem } from "./db";
 import { formatDate, usd } from "./format";
 import { addressLine, site } from "./site";
 import { carrierLabel, trackingUrl } from "./tracking";
+import { env } from "@/lib/env";
 
 /**
  * Email over SMTP (Hostinger: smtp.hostinger.com, port 465). If SMTP_HOST/SMTP_USER/SMTP_PASS are
@@ -14,19 +15,19 @@ let transporter: Transporter | null | undefined;
 
 function getTransporter() {
   if (transporter !== undefined) return transporter;
-  const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+  const [SMTP_HOST, SMTP_USER, SMTP_PASS] = [env("SMTP_HOST"), env("SMTP_USER"), env("SMTP_PASS")];
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
     transporter = null;
     return null;
   }
-  const port = Number(process.env.SMTP_PORT ?? 465);
+  const port = Number(env("SMTP_PORT") ?? 465);
   transporter = nodemailer.createTransport({ host: SMTP_HOST, port, secure: port === 465, auth: { user: SMTP_USER, pass: SMTP_PASS } });
   return transporter;
 }
 
-export const smtpConfigured = () => Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
-const shopEmail = () => process.env.SHOP_EMAIL || site.email;
-const fromAddress = () => process.env.MAIL_FROM || `"${site.name}" <${process.env.SMTP_USER || site.email}>`;
+export const smtpConfigured = () => Boolean(env("SMTP_HOST") && env("SMTP_USER") && env("SMTP_PASS"));
+const shopEmail = () => env("SHOP_EMAIL") || site.email;
+const fromAddress = () => env("MAIL_FROM") || `"${site.name}" <${env("SMTP_USER") || site.email}>`;
 
 export async function sendMail(to: string | null | undefined, subject: string, html: string, replyTo?: string) {
   const t = getTransporter();

@@ -1,3 +1,5 @@
+import { env } from "../env";
+
 /**
  * Thông số kết nối MySQL, khai báo theo MỘT trong hai cách:
  *
@@ -9,8 +11,6 @@
 export type DbConnection =
   | { mode: "parts"; host: string; port: number; user: string; password: string; database: string }
   | { mode: "url"; uri: string };
-
-const env = (k: string) => process.env[k]?.trim().replace(/^(['"])(.*)\1$/, "$2") || undefined;
 
 export function dbConnection(): DbConnection {
   const host = env("DB_HOST");

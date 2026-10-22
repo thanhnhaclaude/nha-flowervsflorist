@@ -3,14 +3,15 @@ import Stripe from "stripe";
 import { and, eq, sql } from "drizzle-orm";
 import { coupons, db, orders } from "./db";
 import { sendOrderEmails } from "./mailer";
+import { env } from "@/lib/env";
 
 let client: Stripe | null = null;
 
-export const paymentsEnabled = () => Boolean(process.env.STRIPE_SECRET_KEY?.trim());
+export const paymentsEnabled = () => Boolean(env("STRIPE_SECRET_KEY"));
 
 export function stripe() {
   if (!client) {
-    const key = process.env.STRIPE_SECRET_KEY?.trim();
+    const key = env("STRIPE_SECRET_KEY");
     if (!key) throw new Error("STRIPE_SECRET_KEY is not set");
     client = new Stripe(key);
   }

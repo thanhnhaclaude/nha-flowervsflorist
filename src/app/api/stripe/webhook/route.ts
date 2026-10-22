@@ -3,15 +3,16 @@ import type Stripe from "stripe";
 import { and, eq } from "drizzle-orm";
 import { db, orders } from "@/lib/db";
 import { markPaidFromSession, stripe } from "@/lib/payments";
+import { env } from "@/lib/env";
 
 /**
  * Stripe webhook: https://flowervsflorist.com/api/stripe/webhook
  * Events: checkout.session.completed, checkout.session.async_payment_succeeded, checkout.session.expired, charge.refunded
  */
 export async function POST(req: Request) {
-  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  const secret = env("STRIPE_WEBHOOK_SECRET");
   const signature = req.headers.get("stripe-signature");
-  if (!secret || !signature || !process.env.STRIPE_SECRET_KEY) return NextResponse.json({ message: "Webhook not configured" }, { status: 400 });
+  if (!secret || !signature || !env("STRIPE_SECRET_KEY")) return NextResponse.json({ message: "Webhook not configured" }, { status: 400 });
 
   let event: Stripe.Event;
   try {

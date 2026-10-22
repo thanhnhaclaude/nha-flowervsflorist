@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SignJWT, jwtVerify } from "jose";
 import bcrypt from "bcryptjs";
+import { env } from "@/lib/env";
 
 export const ADMIN_COOKIE = "fvf_admin";
 export const CUSTOMER_COOKIE = "fvf_session";
@@ -10,7 +11,7 @@ const ADMIN_MAX_AGE = 60 * 60 * 12;
 const CUSTOMER_MAX_AGE = 60 * 60 * 24 * 30;
 
 function secret() {
-  const s = process.env.AUTH_SECRET;
+  const s = env("AUTH_SECRET");
   if (!s || s.length < 32) {
     if (process.env.NODE_ENV !== "production") return new TextEncoder().encode("dev-only-secret-change-me-dev-only-secret");
     throw new Error("AUTH_SECRET must be at least 32 characters");
@@ -43,7 +44,7 @@ const cookieOpts = (maxAge: number) => ({
 
 /** ADMIN_PASSWORD_HASH is base64 of a bcrypt hash ("$" breaks .env files); a raw bcrypt hash also works. */
 function adminHash() {
-  const raw = process.env.ADMIN_PASSWORD_HASH?.trim();
+  const raw = env("ADMIN_PASSWORD_HASH");
   if (!raw) return null;
   return raw.startsWith("$2") ? raw : Buffer.from(raw, "base64").toString("utf8");
 }
@@ -52,7 +53,7 @@ export async function verifyAdmin(username: string, password: string) {
   const hash = adminHash();
   if (!hash) return false;
   const ok = await bcrypt.compare(password, hash);
-  return ok && username === (process.env.ADMIN_USERNAME || "admin");
+  return ok && username === (env("ADMIN_USERNAME") || "admin");
 }
 
 export async function createAdminSession(username: string) {

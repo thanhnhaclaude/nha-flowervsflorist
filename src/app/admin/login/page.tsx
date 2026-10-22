@@ -4,6 +4,7 @@ import { Lock } from "lucide-react";
 import { LogoMark } from "@/components/logo";
 import { createAdminSession, getAdmin, verifyAdmin } from "@/lib/auth";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin sign in", robots: { index: false } };
@@ -21,7 +22,7 @@ async function signIn(formData: FormData) {
 export default async function AdminLogin({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   if (await getAdmin()) redirect("/admin");
   const { error } = await searchParams;
-  const configured = Boolean(process.env.ADMIN_PASSWORD_HASH);
+  const configured = Boolean(env("ADMIN_PASSWORD_HASH"));
   return (
     <main className="grid min-h-screen place-items-center bg-plum-900 p-4">
       <form action={signIn} className="w-full max-w-sm rounded-[1.5rem] bg-white p-8 shadow-lift">

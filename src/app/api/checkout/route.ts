@@ -13,6 +13,7 @@ import { getProductsByIds } from "@/lib/queries";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { checkoutSchema, fieldErrors } from "@/lib/schemas";
 import { site } from "@/lib/site";
+import { env } from "@/lib/env";
 
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const orderCode = () => `FVF-${Array.from({ length: 6 }, () => ALPHABET[randomInt(ALPHABET.length)]).join("")}`;
@@ -146,7 +147,7 @@ export async function POST(req: Request) {
         ...(totals.deliveryFee ? [fee("Overnight shipping", totals.deliveryFee)] : []),
       ],
       discounts,
-      automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === "true" },
+      automatic_tax: { enabled: env("STRIPE_AUTOMATIC_TAX") === "true" },
       success_url: `${base}/order/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${base}/checkout?canceled=1`,
       expires_at: Math.floor(Date.now() / 1000) + 60 * 60,

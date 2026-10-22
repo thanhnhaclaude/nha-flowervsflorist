@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { count } from "drizzle-orm";
 import { db, posts, products } from "@/lib/db";
 import { dbConnection } from "@/lib/db/config";
+import { env } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -10,11 +11,11 @@ export const dynamic = "force-dynamic";
  * Returns only true/false and error codes — never secrets or values.
  */
 export async function GET() {
-  const env = Object.fromEntries(
+  const envSet = Object.fromEntries(
     [
       "DATABASE_URL", "DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "NEXT_PUBLIC_SITE_URL", "AUTH_SECRET", "ADMIN_USERNAME", "ADMIN_PASSWORD_HASH",
       "STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "SMTP_HOST", "SMTP_USER", "SMTP_PASS", "SHOP_EMAIL", "UPLOAD_DIR",
-    ].map((k) => [k, Boolean(process.env[k]?.trim())]),
+    ].map((k) => [k, Boolean(env(k))]),
   );
   let dbConfig: Record<string, unknown>;
   try {
@@ -32,7 +33,7 @@ export async function GET() {
     database = { status: "error", code: err.cause?.code ?? err.code ?? "UNKNOWN" };
   }
   return NextResponse.json(
-    { node: process.version, stripeMode: process.env.STRIPE_SECRET_KEY?.startsWith("sk_live") ? "live" : process.env.STRIPE_SECRET_KEY ? "test" : "off", env, dbConfig, database },
+    { node: process.version, stripeMode: env("STRIPE_SECRET_KEY")?.startsWith("sk_live") ? "live" : env("STRIPE_SECRET_KEY") ? "test" : "off", env: envSet, dbConfig, database },
     { headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex" } },
   );
 }

@@ -1,6 +1,7 @@
 import "server-only";
 import path from "node:path";
 import os from "node:os";
+import { env } from "@/lib/env";
 
 /**
  * Uploaded images live OUTSIDE the app folder so redeploys don't delete them.
@@ -8,8 +9,8 @@ import os from "node:os";
  * Files are served by /media/[...path].
  */
 export function uploadDir() {
-  const fromEnv = process.env.UPLOAD_DIR?.trim();
-  if (fromEnv && !fromEnv.includes("<")) return path.resolve(fromEnv);
+  const fromEnv = env("UPLOAD_DIR");
+  if (fromEnv) return path.resolve(fromEnv);
   return path.join(os.homedir(), "flowervsflorist-uploads");
 }
 

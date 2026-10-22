@@ -2,7 +2,7 @@
 export const site = {
   name: "FlowerVsFlorist",
   domain: "flowervsflorist.com",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://flowervsflorist.com").replace(/\/+$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL?.startsWith("http") ? process.env.NEXT_PUBLIC_SITE_URL : "https://flowervsflorist.com").replace(/\/+$/, ""),
   tagline: "Farm-fresh flowers, delivered tomorrow",
   description:
     "Send fresh flowers online with next-day flower delivery anywhere in the USA. Roses, birthday bouquets, sympathy flowers and plants, carefully packed and shipped overnight.",
