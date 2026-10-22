@@ -26,7 +26,8 @@ Thư mục `deploy/` trên máy bạn (không đưa lên GitHub) có:
 
 ## Bước 3: Tạo tài khoản Stripe
 
-1. Đăng ký tại https://dashboard.stripe.com/register với thông tin **M&R MARKETING GROUP, LLC** (Business type: *LLC*; EIN; địa chỉ 331 3rd Street, Macon, GA 31201; website `https://flowervsflorist.com`; mô tả: *Online florist – fresh flower delivery*). Hoàn tất xác minh để nhận tiền.
+1. Đăng ký tại https://dashboard.stripe.com/register với thông tin **M&R MARKETING GROUP, LLC** (Business type: *LLC*; EIN; địa chỉ 331 3rd Street, Macon, GA 31201; website `https://flowervsflorist.com`; mô tả: *Online flower shop – fresh flowers shipped overnight*). Hoàn tất xác minh để nhận tiền.
+   - **Settings → Public details:** tên hiển thị *FlowerVsFlorist*, statement descriptor `FLOWERVSFLORIST`, email `contact@flowervsflorist.com`, điện thoại (478) 219-8398.
 2. **Developers → API keys** → copy **Secret key** (`sk_live_...`) vào `STRIPE_SECRET_KEY`.
 3. **Developers → Webhooks → Add endpoint**:
    - URL: `https://flowervsflorist.com/api/stripe/webhook`
@@ -54,12 +55,15 @@ Thư mục `deploy/` trên máy bạn (không đưa lên GitHub) có:
 Trong phần **Environment variables**, thêm **từng dòng** trong `deploy/hostinger-env.txt` (tên biến và giá trị). Bỏ qua các dòng bắt đầu bằng `#`.
 
 - `NEXT_PUBLIC_SITE_URL` được ghi vào lúc build. Nếu đổi giá trị này thì phải **Deploy lại**.
-- Biến nào còn ký hiệu `<...>` thì phải thay bằng giá trị thật, hoặc xóa đi (riêng Stripe có thể để trống).
+- Biến nào còn ký hiệu `<...>` mà bạn chưa có giá trị (ví dụ Stripe, mật khẩu email) thì cứ để nguyên hoặc bỏ qua: website tự coi là **chưa cấu hình** và vẫn chạy (đơn hàng ở chế độ "Place Order", email tạm không gửi). Điền giá trị thật sau rồi bấm **Deploy** lại.
 
 ## Bước 6: Deploy và gắn tên miền
 
-1. Bấm **Deploy**. Lần đầu mất vài phút.
-2. Trỏ tên miền **flowervsflorist.com** (và `www`) về ứng dụng này, bật **SSL** (hPanel → **Security → SSL**).
+1. Bấm **Deploy**. Lần đầu mất vài phút (cài gói + build).
+2. Trỏ tên miền **flowervsflorist.com** (và `www`) về ứng dụng này, bật **SSL** (hPanel → **Security → SSL**). Địa chỉ `www.` tự chuyển về `flowervsflorist.com`.
+3. **Email không vào spam:** hPanel → **Emails → Email deliverability / DNS**: bật đủ **SPF, DKIM, DMARC** cho `flowervsflorist.com` (nếu tên miền dùng nameserver Hostinger, thường chỉ cần bấm "Fix/Enable").
+
+> Nếu lúc khởi động database chưa kết nối được (sai mật khẩu, MySQL chưa sẵn sàng), website tự thử tạo bảng lại mỗi 30 giây trong 30 phút. Sửa biến môi trường → Deploy lại là xong.
 
 ## Bước 7: Kiểm tra sau khi chạy
 
@@ -67,7 +71,7 @@ Trong phần **Environment variables**, thêm **từng dòng** trong `deploy/hos
 - [ ] Trang chủ, https://flowervsflorist.com/roses, https://flowervsflorist.com/product/crimson-classic-dozen-red-roses
 - [ ] https://flowervsflorist.com/admin → đăng nhập user `admin`, mật khẩu ghi ở dòng đầu `deploy/hostinger-env.txt`
 - [ ] Đặt thử một đơn → thanh toán Stripe → trang "Thank you"; email xác nhận đến khách và đến `contact@flowervsflorist.com`; trong Stripe → Webhooks, sự kiện `checkout.session.completed` trả về 200
-- [ ] Admin → Orders → mở đơn → đổi trạng thái "Out for delivery" → khách nhận email
+- [ ] Admin → Orders → mở đơn → nhập Tracking number → đổi trạng thái **Shipped** → khách nhận email có link theo dõi FedEx/UPS
 - [ ] Footer có thông tin **M&R Marketing Group, LLC**; các trang Terms, Privacy, Refund policy và Delivery information mở được
 - [ ] https://flowervsflorist.com/sitemap.xml và /robots.txt hiển thị đúng
 
@@ -87,6 +91,29 @@ Website hứa: **đặt trước 2 PM giờ miền Đông (ET), Thứ 2 – Th�
 4. Sau khi giao: đổi sang **Delivered**.
 
 > Nếu nhà cung cấp có giờ chốt đơn hoặc ngày giao khác, sửa `cutoffHour` và `deliveryDays` trong `src/lib/site.ts`. Sản phẩm cần thêm 1 ngày chuẩn bị: bỏ tick "Next-day eligible" trong Admin → Products.
+
+## Bước 10: Checklist trước khi mở bán
+
+- [ ] Đã có nhà cung cấp ship hoa overnight và thống nhất giờ chốt đơn (mặc định 2 PM ET)
+- [ ] Stripe đã xác minh xong, dùng khóa `sk_live_...`, webhook Live trả về 200
+- [ ] Đặt 1 đơn thật giá trị nhỏ → nhận email → hoàn tiền trong Stripe → đơn chuyển "Refunded"
+- [ ] SMTP gửi được email (kiểm tra cả hộp thư Spam)
+- [ ] Thay ảnh minh họa bằng ảnh thật của sản phẩm sẽ giao (Admin → Products → Upload images) để ảnh khớp với hàng thật
+- [ ] Xóa hoặc đổi mã giảm giá mẫu `WELCOME10`, `FREEDELIVERY` nếu không muốn dùng (Admin → Coupons)
+- [ ] Nhờ luật sư xem lại Terms, Privacy Policy và Refund Policy (đây là bản mẫu)
+
+## Xử lý sự cố
+
+| Hiện tượng | Nguyên nhân thường gặp | Cách xử lý |
+|---|---|---|
+| `/api/health` → `"code":"ER_ACCESS_DENIED_ERROR"` | Sai `DB_USER` / `DB_PASSWORD` | Kiểm tra lại trong hPanel → MySQL Databases, Deploy lại |
+| `/api/health` → `"code":"ER_BAD_DB_ERROR"` | Sai `DB_NAME` | Tên database có dạng `u123456789_tên`, copy đúng nguyên văn |
+| `/api/health` → `"code":"ECONNREFUSED"` | Sai `DB_HOST` | Dùng `localhost` |
+| Trang báo "We couldn't load this page" | Database chưa kết nối | Xem `/api/health` để biết mã lỗi |
+| Không đăng nhập được `/admin` | Thiếu `ADMIN_PASSWORD_HASH` hoặc `AUTH_SECRET` | Dán lại đúng 2 dòng từ `deploy/hostinger-env.txt`, Deploy lại |
+| Không có email | Thiếu `SMTP_PASS` hoặc chưa bật SPF/DKIM | Kiểm tra `/api/health` (SMTP_* phải `true`) và cấu hình DNS email |
+| Nút thanh toán ghi "Place Order" thay vì "Continue to Secure Payment" | Chưa có `STRIPE_SECRET_KEY` | Điền khóa Stripe, Deploy lại |
+| Build lỗi trên Hostinger | Node.js quá cũ | Chọn Node.js 22.x |
 
 ---
 
