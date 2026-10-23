@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+// Keep native thread pools small during build/start (inherited by Next's worker processes).
+process.env.RAYON_NUM_THREADS ??= "2";
+process.env.UV_THREADPOOL_SIZE ??= "4";
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -11,8 +15,14 @@ const nextConfig: NextConfig = {
   // Always put title/description/canonical in <head> (no streamed metadata) so every crawler reads it.
   htmlLimitedBots: /.*/,
   poweredByHeader: false,
-  // Tailwind CSS is small: inline it to remove the render-blocking stylesheet request (better FCP/LCP).
-  experimental: { inlineCss: true },
+  experimental: {
+    // Tailwind CSS is small: inline it to remove the render-blocking stylesheet request (better FCP/LCP).
+    inlineCss: true,
+    // Shared hosting (Hostinger) caps processes/threads per account: build with a single worker so
+    // native (Rust) compilers don't abort with "non-unwinding panic" when they can't spawn threads.
+    cpus: 1,
+    staticGenerationMaxConcurrency: 2,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 70, 80],
