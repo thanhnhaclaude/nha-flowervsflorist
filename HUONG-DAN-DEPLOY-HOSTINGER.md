@@ -120,6 +120,6 @@ Website hứa: **đặt trước 2 PM giờ miền Đông (ET), Thứ 2 – Th�
 ## Cập nhật website về sau
 
 - Sửa code rồi push lên nhánh `main`. Trong hPanel bấm **Deploy** lại, hoặc bật tự deploy khi có commit mới.
-- Đổi cấu trúc bảng: sửa `src/lib/db/schema.ts`, chạy `npm run db:generate`, rồi commit thư mục `drizzle/`. Website tự áp dụng migration khi khởi động.
+- Đổi cấu trúc bảng: sửa `src/lib/db/schema.ts`, chạy `npm run db:generate` (tự cập nhật `src/lib/db/migrations.ts`), rồi commit. Website tự áp dụng migration khi khởi động.
 - Ảnh tải lên trong admin được lưu ở `/home/<user>/flowervsflorist-uploads`, nằm ngoài thư mục app nên không mất khi deploy lại.
 - Sao lưu dữ liệu: phpMyAdmin → **Export**.

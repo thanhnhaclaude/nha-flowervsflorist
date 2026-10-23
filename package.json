@@ -10,7 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "db:local": "tsx scripts/dev-db.ts",
-    "db:generate": "drizzle-kit generate",
+    "db:generate": "drizzle-kit generate && node scripts/embed-migrations.mjs",
     "db:setup": "tsx scripts/setup-db.ts",
     "export-sql": "tsx scripts/export-sql.ts",
     "hash-password": "tsx scripts/hash-password.ts",
