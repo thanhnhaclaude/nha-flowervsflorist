@@ -31,6 +31,8 @@ export const site = {
     instagram: "",
     pinterest: "",
   },
+  /** Google Analytics 4 measurement ID (also used for Search Console verification). */
+  gaId: "G-G2Y36XV0LS",
   /** Parent company (owner/operator of this store). */
   parent: {
     name: "M&R Marketing Group, LLC",

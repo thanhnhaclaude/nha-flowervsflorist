@@ -3,7 +3,7 @@ import { addressLine, commerce, site } from "@/lib/site";
 import { usd } from "@/lib/format";
 
 const company = `${site.company.displayName}, a ${site.company.state} limited liability company`;
-const updated = "October 19, 2026";
+const updated = "October 23, 2026";
 
 export type InfoPage = { slug: string; title: string; seoTitle: string; description: string; updated?: string; content: string };
 
@@ -172,11 +172,11 @@ ${site.company.displayName} · ${addressLine} · ${site.phoneDisplay} · ${site.
 
 ## How we share information
 
-We share information only with service providers who help us operate—such as our payment processor (Stripe), email provider, hosting provider, fulfillment partners and shipping carriers—and when required by law. **We do not sell your personal information.**
+We share information only with service providers who help us operate—such as our payment processor (Stripe), email provider, hosting provider, analytics provider (Google Analytics), fulfillment partners and shipping carriers—and when required by law. **We do not sell your personal information.**
 
 ## Cookies
 
-We use essential cookies to keep your cart and sign-in session working. We do not use third-party advertising cookies.
+We use essential cookies to keep your cart and sign-in session working. We also use **Google Analytics** to understand how visitors use the Site (pages viewed, device type, approximate location); it sets analytics cookies and Google processes this data under its own privacy policy. You can opt out with the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout) or by blocking cookies in your browser. We do not use third-party advertising cookies.
 
 ## Data retention
 

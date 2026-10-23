@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display } from "next/font/google";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: site.name,
   formatDetection: { telephone: false },
+  // Google Search Console ownership verification
+  verification: { google: "rZxpPDyh4STwyvdPPP9g22PXR-xna2zeztcLku6o9tY" },
 };
 
 export const viewport: Viewport = {
@@ -26,7 +29,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US" className={playfair.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <GoogleAnalytics id={site.gaId} />
+      </body>
     </html>
   );
 }
