@@ -1,28 +1,25 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Listing, type ListingParams } from "@/components/listing";
+import { Listing } from "@/components/listing";
+import { ProductGrid } from "@/components/product-card";
 import { Breadcrumbs } from "@/components/ui";
 import { CutoffCountdown } from "@/components/cutoff-countdown";
 import { flowerTypes, occasions } from "@/data/categories";
+import { sortProducts, toCard, toListItem } from "@/lib/cards";
 import { getProducts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
+export const revalidate = 300;
 
-type Props = { searchParams: Promise<ListingParams> };
+export const metadata: Metadata = pageMeta({
+  title: "Shop All Flowers Online | Fresh Bouquets & Arrangements",
+  description: "Shop all fresh flowers online: roses, sunflowers, tulips, lilies, orchids, plants and gifts. Next-day flower delivery across the USA.",
+  path: "/flowers",
+});
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const sp = await searchParams;
-  return pageMeta({
-    title: "Shop All Flowers Online | Fresh Bouquets & Arrangements",
-    description: "Shop all fresh flowers online: roses, sunflowers, tulips, lilies, orchids, plants and gifts. Next-day flower delivery across the USA.",
-    path: "/flowers",
-    noindex: Boolean(sp.color || sp.price || sp.sort || sp.nextday),
-  });
-}
-
-export default async function AllFlowersPage({ searchParams }: Props) {
-  const [products, sp] = await Promise.all([getProducts(), searchParams]);
+export default async function AllFlowersPage() {
+  const products = sortProducts(await getProducts(), "featured");
   return (
     <>
       <section className="bg-gradient-to-br from-petal via-blush to-white">
@@ -43,7 +40,9 @@ export default async function AllFlowersPage({ searchParams }: Props) {
         </div>
       </section>
       <section className="container-x py-10">
-        <Listing basePath="/flowers" all={products} params={sp} />
+        <Listing basePath="/flowers" items={products.map(toListItem)}>
+          <ProductGrid products={products.map(toCard)} priorityCount={4} />
+        </Listing>
       </section>
     </>
   );

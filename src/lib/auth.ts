@@ -80,12 +80,19 @@ export async function requireAdmin() {
 export const hashPassword = (pw: string) => bcrypt.hash(pw, 11);
 export const checkPassword = (pw: string, hash: string) => bcrypt.compare(pw, hash);
 
+/** Readable by the browser so cached pages can show the signed-in header; holds no identity. */
+const SIGNED_IN_FLAG = "fvf_in";
+
 export async function createCustomerSession(id: number, email: string) {
-  (await cookies()).set(CUSTOMER_COOKIE, await sign({ sub: String(id), email, role: "customer" }, CUSTOMER_MAX_AGE), cookieOpts(CUSTOMER_MAX_AGE));
+  const jar = await cookies();
+  jar.set(CUSTOMER_COOKIE, await sign({ sub: String(id), email, role: "customer" }, CUSTOMER_MAX_AGE), cookieOpts(CUSTOMER_MAX_AGE));
+  jar.set(SIGNED_IN_FLAG, "1", { ...cookieOpts(CUSTOMER_MAX_AGE), httpOnly: false });
 }
 
 export async function destroyCustomerSession() {
-  (await cookies()).delete(CUSTOMER_COOKIE);
+  const jar = await cookies();
+  jar.delete(CUSTOMER_COOKIE);
+  jar.delete(SIGNED_IN_FLAG);
 }
 
 export async function getCustomerSession() {

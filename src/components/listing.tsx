@@ -1,8 +1,9 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { ProductGrid } from "./product-card";
-import { toCard } from "@/lib/cards";
-import { sortProducts, type ProductWithRating, type SortKey } from "@/lib/queries";
+import { sortProducts, type ListItem, type SortKey } from "@/lib/cards";
 
 export const PRICE_RANGES = [
   { key: "under-50", label: "Under $50", min: 0, max: 4999 },
@@ -31,7 +32,13 @@ const COLOR_SWATCH: Record<string, string> = {
 
 export type ListingParams = { color?: string; price?: string; sort?: string; nextday?: string };
 
-export function applyFilters(list: ProductWithRating[], params: ListingParams) {
+const KEYS = ["color", "price", "sort", "nextday"] as const;
+const readParams = (search: string): ListingParams => {
+  const sp = new URLSearchParams(search);
+  return Object.fromEntries(KEYS.flatMap((k) => (sp.get(k) ? [[k, sp.get(k)!]] : [])));
+};
+
+function applyFilters(list: ListItem[], params: ListingParams) {
   let out = list;
   if (params.color) out = out.filter((p) => p.colors.includes(params.color!));
   const range = PRICE_RANGES.find((r) => r.key === params.price);
@@ -41,15 +48,36 @@ export function applyFilters(list: ProductWithRating[], params: ListingParams) {
   return sortProducts(out, sort);
 }
 
-/** Server-rendered filter bar + grid. Filters are plain links, so they work without JavaScript. */
-export function Listing({ basePath, all, params }: { basePath: string; all: ProductWithRating[]; params: ListingParams }) {
-  const shown = applyFilters(all, params);
-  const colors = [...new Set(all.flatMap((p) => p.colors))].filter((c) => COLOR_SWATCH[c]);
+/**
+ * Filter bar + grid. The page is cached (ISR), so filters run in the browser: `children` is the
+ * server-rendered default grid (what crawlers and first paint see); once a filter is chosen the grid is
+ * rebuilt client-side from `items`. Filters stay real links (?color=red) for no-JS and shareable URLs.
+ */
+export function Listing({ basePath, items, children }: { basePath: string; items: ListItem[]; children: React.ReactNode }) {
+  const [params, setParams] = useState<ListingParams>({});
+
+  useEffect(() => {
+    const sync = () => setParams(readParams(window.location.search));
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+
   const href = (patch: Partial<ListingParams>) => {
     const next = { ...params, ...patch };
     const qs = new URLSearchParams(Object.entries(next).filter(([, v]) => v) as [string, string][]).toString();
     return qs ? `${basePath}?${qs}` : basePath;
   };
+  const go = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const url = e.currentTarget.getAttribute("href")!;
+    window.history.pushState(null, "", url);
+    setParams(readParams(url.split("?")[1] ?? ""));
+  };
+
+  const filtering = Object.keys(params).length > 0;
+  const shown = filtering ? applyFilters(items, params) : items;
+  const colors = [...new Set(items.flatMap((p) => p.colors))].filter((c) => COLOR_SWATCH[c]);
   const active = Boolean(params.color || params.price || params.nextday);
   const chip = (on: boolean) =>
     `inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-sm font-bold transition-colors ${on ? "border-plum-600 bg-plum-600 text-white" : "border-line bg-white text-ink hover:border-plum-200 hover:bg-blush"}`;
@@ -61,23 +89,23 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
           <span className="mr-1 flex items-center gap-2 text-sm font-extrabold text-plum-700">
             <SlidersHorizontal className="h-4 w-4" /> Filter
           </span>
-          <Link href={href({ nextday: params.nextday === "1" ? undefined : "1" })} className={chip(params.nextday === "1")} scroll={false}>
+          <a href={href({ nextday: params.nextday === "1" ? undefined : "1" })} onClick={go} className={chip(params.nextday === "1")} rel="nofollow">
             Next-day delivery
-          </Link>
+          </a>
           {PRICE_RANGES.map((r) => (
-            <Link key={r.key} href={href({ price: params.price === r.key ? undefined : r.key })} className={chip(params.price === r.key)} scroll={false}>
+            <a key={r.key} href={href({ price: params.price === r.key ? undefined : r.key })} onClick={go} className={chip(params.price === r.key)} rel="nofollow">
               {r.label}
-            </Link>
+            </a>
           ))}
         </div>
         {colors.length > 1 && (
           <div className="flex flex-wrap items-center gap-2">
             <span className="mr-1 text-sm font-extrabold text-plum-700">Color</span>
             {colors.map((c) => (
-              <Link key={c} href={href({ color: params.color === c ? undefined : c })} className={chip(params.color === c)} scroll={false} aria-current={params.color === c ? "true" : undefined}>
+              <a key={c} href={href({ color: params.color === c ? undefined : c })} onClick={go} className={chip(params.color === c)} aria-current={params.color === c ? "true" : undefined} rel="nofollow">
                 <span className="h-4 w-4 rounded-full border border-black/10" style={{ background: COLOR_SWATCH[c] }} aria-hidden="true" />
                 <span className="capitalize">{c}</span>
-              </Link>
+              </a>
             ))}
           </div>
         )}
@@ -85,9 +113,9 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
           <p className="text-sm text-muted" aria-live="polite">
             <strong className="text-ink">{shown.length}</strong> {shown.length === 1 ? "design" : "designs"}
             {active && (
-              <Link href={basePath} className="ml-3 font-bold text-rose-600 hover:underline" scroll={false}>
+              <a href={basePath} onClick={go} className="ml-3 font-bold text-rose-600 hover:underline">
                 Clear filters
-              </Link>
+              </a>
             )}
           </p>
           <div className="flex flex-wrap items-center gap-1.5 text-sm">
@@ -95,23 +123,25 @@ export function Listing({ basePath, all, params }: { basePath: string; all: Prod
             {SORTS.map((s) => {
               const on = (params.sort ?? "featured") === s.key;
               return (
-                <Link key={s.key} href={href({ sort: s.key === "featured" ? undefined : s.key })} scroll={false} aria-current={on ? "true" : undefined} className={`rounded-full px-3 py-1.5 font-bold ${on ? "bg-petal text-plum-700" : "text-ink hover:bg-blush"}`}>
+                <a key={s.key} href={href({ sort: s.key === "featured" ? undefined : s.key })} onClick={go} rel="nofollow" aria-current={on ? "true" : undefined} className={`rounded-full px-3 py-1.5 font-bold ${on ? "bg-petal text-plum-700" : "text-ink hover:bg-blush"}`}>
                   {s.label}
-                </Link>
+                </a>
               );
             })}
           </div>
         </div>
       </div>
       <h2 className="sr-only">Products</h2>
-      {shown.length ? (
-        <ProductGrid products={shown.map(toCard)} priorityCount={4} />
+      {!filtering ? (
+        children
+      ) : shown.length ? (
+        <ProductGrid products={shown} />
       ) : (
         <div className="rounded-[var(--radius-card)] bg-blush p-10 text-center">
           <p className="font-display text-2xl font-bold text-plum-700">No designs match those filters</p>
-          <Link href={basePath} className="btn btn-primary mt-5">
+          <a href={basePath} onClick={go} className="btn btn-primary mt-5">
             Clear filters
-          </Link>
+          </a>
         </div>
       )}
     </div>

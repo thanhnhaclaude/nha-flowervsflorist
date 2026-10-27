@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { useSignedIn } from "./use-signed-in";
 
 /**
  * Wishlist of product ids. Guests keep it in localStorage; signed-in customers also sync it to their
@@ -10,7 +11,8 @@ type WishlistContext = { ids: number[]; has: (id: number) => boolean; toggle: (i
 const Ctx = createContext<WishlistContext | null>(null);
 const KEY = "fvf_wishlist_v1";
 
-export function WishlistProvider({ signedIn, children }: { signedIn: boolean; children: React.ReactNode }) {
+export function WishlistProvider({ children }: { children: React.ReactNode }) {
+  const signedIn = useSignedIn();
   const [ids, setIds] = useState<number[]>([]);
 
   useEffect(() => {

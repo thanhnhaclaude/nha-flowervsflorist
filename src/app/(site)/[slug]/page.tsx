@@ -2,34 +2,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { Listing, type ListingParams } from "@/components/listing";
+import { Listing } from "@/components/listing";
+import { ProductGrid } from "@/components/product-card";
 import { CutoffCountdown } from "@/components/cutoff-countdown";
 import { Breadcrumbs, Faq, TrustBar } from "@/components/ui";
 import { JsonLd } from "@/components/json-ld";
 import { categories, categoryMap } from "@/data/categories";
+import { sortProducts, toCard, toListItem } from "@/lib/cards";
 import { img } from "@/lib/format";
 import { getCategoryProducts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
+export const revalidate = 300;
 
-type Props = { params: Promise<{ slug: string }>; searchParams: Promise<ListingParams> };
+/** Rendered on first visit, then cached (no database needed at build time). */
+export async function generateStaticParams() {
+  return [];
+}
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const c = categoryMap.get(slug);
   if (!c) return {};
-  const sp = await searchParams;
-  const filtered = Boolean(sp.color || sp.price || sp.sort || sp.nextday);
-  return pageMeta({ title: c.seoTitle, description: c.seoDescription, path: `/${slug}`, image: c.image, noindex: filtered });
+  return pageMeta({ title: c.seoTitle, description: c.seoDescription, path: `/${slug}`, image: c.image });
 }
 
-export default async function CategoryPage({ params, searchParams }: Props) {
+export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const c = categoryMap.get(slug);
   if (!c) notFound();
-  const [products, sp] = await Promise.all([getCategoryProducts(slug), searchParams]);
+  const products = sortProducts(await getCategoryProducts(slug), "featured");
   const siblings = categories.filter((x) => x.group === c.group && x.slug !== c.slug);
 
   return (
@@ -51,7 +57,9 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       </section>
 
       <section className="container-x py-10">
-        <Listing basePath={`/${c.slug}`} all={products} params={sp} />
+        <Listing basePath={`/${c.slug}`} items={products.map(toListItem)}>
+          <ProductGrid products={products.map(toCard)} priorityCount={4} />
+        </Listing>
       </section>
 
       <section className="container-x pb-12">

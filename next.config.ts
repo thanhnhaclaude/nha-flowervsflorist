@@ -26,6 +26,9 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 70, 80],
+    // Fewer candidate widths = shorter srcset in every page's HTML (defaults list 15 widths)
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [96, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async headers() {

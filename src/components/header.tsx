@@ -8,6 +8,7 @@ import { ChevronDown, Heart, Menu, Phone, Search, ShoppingBag, Truck, User, X } 
 import { Logo } from "./logo";
 import { useCart } from "./cart/cart-context";
 import { useWishlist } from "./wishlist-context";
+import { useSignedIn } from "./use-signed-in";
 import { mainMenu, type MenuItem } from "@/lib/menu";
 import { img } from "@/lib/format";
 import { site } from "@/lib/site";
@@ -79,7 +80,8 @@ function MegaMenu({ item, onNavigate }: { item: MenuItem; onNavigate: () => void
   );
 }
 
-export function Header({ signedIn }: { signedIn: boolean }) {
+export function Header() {
+  const signedIn = useSignedIn();
   const pathname = usePathname();
   const { count, setDrawerOpen } = useCart();
   const wishlist = useWishlist();

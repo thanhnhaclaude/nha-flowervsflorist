@@ -10,7 +10,13 @@ import { getPost, getPosts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
+export const revalidate = 300;
+
+/** Rendered on first visit, then cached (no database needed at build time). */
+export async function generateStaticParams() {
+  return [];
+}
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

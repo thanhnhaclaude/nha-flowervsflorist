@@ -11,7 +11,8 @@ import { getPosts, getProducts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
+export const revalidate = 300;
 
 export const metadata = pageMeta({
   title: "Flower Delivery | Send Flowers Online, Delivered Tomorrow | FlowerVsFlorist",

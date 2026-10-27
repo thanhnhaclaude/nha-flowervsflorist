@@ -6,7 +6,8 @@ import { readingMinutes } from "@/lib/markdown";
 import { getPosts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
+export const revalidate = 300;
 export const metadata = pageMeta({
   title: "Flower Blog: Meanings, Care Tips & Gifting Guides",
   description: "Flower meanings, care tips, etiquette and gifting ideas from the florists at FlowerVsFlorist.",
