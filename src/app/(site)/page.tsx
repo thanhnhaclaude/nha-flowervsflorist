@@ -11,8 +11,8 @@ import { getPosts, getProducts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
-export const revalidate = 300;
+// Cached and refreshed hourly (ISR) so Hostinger's CDN serves it from cache; admin edits revalidate the origin instantly (CDN copy within 1h).
+export const revalidate = 3600;
 
 export const metadata = pageMeta({
   title: "Flower Delivery | Send Flowers Online, Delivered Tomorrow | FlowerVsFlorist",

@@ -6,8 +6,8 @@ import { readingMinutes } from "@/lib/markdown";
 import { getPosts } from "@/lib/queries";
 import { pageMeta } from "@/lib/seo";
 
-// Cached and refreshed every 5 minutes (ISR) so Hostinger's CDN can serve it; admin edits revalidate instantly.
-export const revalidate = 300;
+// Cached and refreshed hourly (ISR) so Hostinger's CDN serves it from cache; admin edits revalidate the origin instantly (CDN copy within 1h).
+export const revalidate = 3600;
 export const metadata = pageMeta({
   title: "Flower Blog: Meanings, Care Tips & Gifting Guides",
   description: "Flower meanings, care tips, etiquette and gifting ideas from the florists at FlowerVsFlorist.",
