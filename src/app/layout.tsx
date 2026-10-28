@@ -5,7 +5,8 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 // One web font (headings). Body text uses the native system UI font: zero download, fastest layout.
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], style: ["normal", "italic"], variable: "--font-playfair", display: "swap" });
+// display "optional": never swap fonts after first paint (font swap caused CLS 0.13 on Linux test devices).
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["700"], style: ["normal", "italic"], variable: "--font-playfair", display: "optional" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

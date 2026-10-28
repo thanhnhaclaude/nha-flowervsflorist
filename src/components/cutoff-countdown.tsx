@@ -19,7 +19,17 @@ export function CutoffCountdown({ variant = "pill" }: { variant?: "pill" | "inli
     return () => clearInterval(t);
   }, []);
 
-  if (state === undefined) return <span className={variant === "pill" ? "inline-block h-9" : ""} aria-hidden="true" />;
+  // Same box as the real pill/line (invisible) so the text below doesn't shift when it appears.
+  if (state === undefined)
+    return variant === "pill" ? (
+      <p className="invisible inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm" aria-hidden="true">
+        Order within 10h 59m for delivery Wednesday, Oct 28
+      </p>
+    ) : (
+      <p className="invisible flex items-center gap-2 text-sm" aria-hidden="true">
+        Order within 10h 59m for delivery Wednesday, Oct 28
+      </p>
+    );
 
   const arrives = formatDate(state.arrives, { weekday: "long", month: "short", day: "numeric" });
   const text = state.open ? (
