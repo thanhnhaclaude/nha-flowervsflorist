@@ -7,7 +7,7 @@ import { pageMeta } from "@/lib/seo";
 import { addressLine, site } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "About Us – Fresh Flowers, Florist-Crafted",
+  title: "About Us – FlowerVsFlorist, owned by M&R MARKETING GROUP, LLC",
   description: `Meet ${site.name}: an online flower shop owned and operated by ${site.company.displayName}, a Macon, Georgia company, delivering florist-arranged flowers across the USA.`,
   path: "/about",
   image: "brand/florist-studio",
@@ -88,11 +88,15 @@ export default function AboutPage() {
         <h2 className="mb-6 text-3xl font-bold text-plum-700">Company Information</h2>
         <dl className="card grid gap-x-10 gap-y-4 p-6 sm:grid-cols-2 md:p-8">
           {[
-            ["Business name", site.company.legalName],
-            ["Online store", `${site.name} (${site.domain})`],
+            ["Legal business name", site.company.legalName],
+            ["Brand / online store", `${site.name} (${site.domain})`],
+            ["Domain owner & operator", site.company.legalName],
             ["Parent company website", "www.mandr-group.com"],
             ["Business type", site.company.type],
             ["State of formation", site.company.state],
+            ["Georgia Control Number", site.company.controlNumber],
+            ["Registered", "May 7, 2012"],
+            ["Nature of business", "Online retail of fresh flowers, plants and gifts, shipped overnight within the U.S."],
             ["Principal office", addressLine],
             ["Contact", site.contactPerson],
             ["Phone", site.phoneDisplay],

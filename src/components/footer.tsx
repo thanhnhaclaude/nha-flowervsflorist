@@ -80,13 +80,21 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-4 py-6 text-sm text-plum-100/80 md:flex-row md:items-center md:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.name}. {site.domain} is an online flower shop owned and operated by{" "}
-            <a href={site.parent.url} target="_blank" rel="noopener" className="font-bold text-white underline-offset-2 hover:underline">
-              {site.company.displayName}
-            </a>
-            , a {site.company.state} limited liability company, {addressLine}.
-          </p>
+          {/* Legal entity block: must match the state registration exactly (Google Ads advertiser verification). */}
+          <div className="max-w-3xl space-y-1">
+            <p>
+              <strong className="text-white">{site.name}</strong> ({site.domain}) is an online flower shop owned and operated by{" "}
+              <a href={site.parent.url} target="_blank" rel="noopener" className="font-bold text-white underline-offset-2 hover:underline">
+                {site.company.legalName}
+              </a>
+              , a {site.company.state} {site.company.type} (Control No. {site.company.controlNumber}).
+            </p>
+            <p>
+              Principal office: {addressLine} · <a href={`tel:${site.phone}`} className="hover:underline">{site.phoneDisplay}</a> ·{" "}
+              <a href={`mailto:${site.email}`} className="hover:underline">{site.email}</a>
+            </p>
+            <p>© {new Date().getFullYear()} {site.company.legalName}. All rights reserved.</p>
+          </div>
           <div className="flex flex-wrap items-center gap-2" aria-label="Accepted payment methods">
             {["Visa", "Mastercard", "Amex", "Discover", "Apple Pay", "Google Pay"].map((p) => (
               <span key={p} className="rounded-md bg-white px-2 py-1 text-[0.6875rem] font-extrabold text-plum-800">

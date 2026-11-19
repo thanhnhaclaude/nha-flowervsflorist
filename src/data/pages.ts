@@ -2,7 +2,7 @@
 import { addressLine, commerce, site } from "@/lib/site";
 import { usd } from "@/lib/format";
 
-const company = `${site.company.displayName}, a ${site.company.state} limited liability company`;
+const company = `${site.company.legalName}, a ${site.company.state} ${site.company.type} (Control No. ${site.company.controlNumber})`;
 const updated = "October 23, 2026";
 
 export type InfoPage = { slug: string; title: string; seoTitle: string; description: string; updated?: string; content: string };
